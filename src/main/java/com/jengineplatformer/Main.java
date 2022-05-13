@@ -5,12 +5,9 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.GameCamera;
 import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.GameScene;
-import com.JEngine.Utility.Settings.EnginePrefs;
+import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.jengineplatformer.LevelEditor.EditorRenderer;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Group;
-import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -24,7 +21,6 @@ public class Main extends Application {
     public void start(Stage stage) throws IOException {
         GameWindow window = new GameWindow(mainMenu, 1f, "JEngine Platformer", stage);
         Main.mainCamera = new GameCamera(new Vector3(0,0,0), window, mainMenu, null, new Identity("Main Camera", "camera"));
-        EnginePrefs.logExtra = true;
         // create main menu text
         Text text = new Text("JEngine Platformer");
         text.setFill(Color.WHITE);
@@ -34,13 +30,21 @@ public class Main extends Application {
         mainMenu.addUI(text);
         window.setTargetFPS(60);
         window.setBackgroundColor(Color.BLACK);
-        window.start();
 
         EditorRenderer.LoadEditor();
 
         stage.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, (event) -> {
             if (event.getCode() == javafx.scene.input.KeyCode.F1) {
                 EditorRenderer.LoadEditor();
+            }if (event.getCode() == javafx.scene.input.KeyCode.F2) {
+                /*for (GameObject o :
+                        SceneManager.getActiveScene().getObjects()) {
+                    if(o==null)
+                        continue;
+                    System.out.println(o.getIdentity().getName() + o.getPosition());
+                    //System.out.println(System.identityHashCode(o));
+                }*/
+                System.out.println(SceneManager.getActiveScene().getSceneName());
             }
         });
     }

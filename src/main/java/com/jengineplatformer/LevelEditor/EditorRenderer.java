@@ -25,11 +25,15 @@ public class EditorRenderer {
             hasInit = true;
             InitEditor();
         }
+        ReloadScene();
     }
 
     private static void InitEditor(){
 
-        //editorScene.add(new Wall(new Vector3(0,0,0), new Vector3(2,1,1), new GameImage(GenerateSolidTexture.generateImage(128,128,0xFF0000FF))));
+    }
+
+    private static void ReloadScene(){
+        editorScene = LevelLoader.loadFromFile(new File("Levels/level").getAbsolutePath());
     }
     public static void QuitEditor(){
         SceneManager.switchScene(Main.mainMenu);

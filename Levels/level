@@ -1,7 +1,21 @@
 TITLE
 START GAMEOBJECT
 transform
-250
+0
+200
+5
+0
+0
+0
+1
+1
+1
+wall
+END GAMEOBJECT
+
+START GAMEOBJECT
+transform
+400
 5
 5
 0
@@ -15,8 +29,50 @@ END GAMEOBJECT
 
 START GAMEOBJECT
 transform
+0
+600
+5
+0
+0
+0
+10
+1
+1
+wall
+END GAMEOBJECT
+
+START GAMEOBJECT
+transform
+0
+0
+1
+0
+0
+0
+1
+1
+1
+player
+END GAMEOBJECT
+
+START GAMEOBJECT
+transform
 200
+530
 5
+0
+0
+0
+1
+1
+1
+spike
+END GAMEOBJECT
+
+START GAMEOBJECT
+transform
+600
+530
 5
 0
 0
@@ -24,5 +80,33 @@ transform
 1
 1
 1
+spike
+END GAMEOBJECT
+
+START GAMEOBJECT
+transform
+1000
+530
+5
+0
+0
+0
+1
+1
+1
+spike
+END GAMEOBJECT
+
+START GAMEOBJECT
+transform
+1100
+500
+5
+0
+0
+0
+0.5f
+0.25f
+0.5f
 wall
 END GAMEOBJECT
