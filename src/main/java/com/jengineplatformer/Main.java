@@ -8,6 +8,7 @@ import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.jengineplatformer.Core.Enemy;
 import com.jengineplatformer.LevelEditor.EditorManager;
+import com.jengineplatformer.LevelEditor.LevelSaver;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -44,7 +45,7 @@ public class Main extends Application {
                 EditorManager.Play();
             }
             if (event.getCode() == javafx.scene.input.KeyCode.F3) {
-                SceneManager.getActiveScene().add(new Enemy(new Vector3(300,200,0), Vector3.oneVector()));
+                LevelSaver.SaveLevel(EditorManager.editorScene, "Levels/level2");
             }
             if (event.getCode() == javafx.scene.input.KeyCode.F4) {
                 System.out.println(EditorManager.playerRef.getPosition());

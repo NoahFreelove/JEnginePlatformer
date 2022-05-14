@@ -14,7 +14,7 @@ public class EditorManager {
     public static GameScene editorScene = new GameScene(5, "EditorScene");
     public static CameraControl cameraController = new CameraControl();
     public static EditorPointer pointer = new EditorPointer();
-    public static String sceneFP = new File("Levels/level").getAbsolutePath();
+    public static String sceneFP = new File("Levels/level2").getAbsolutePath();
     public static PlatformPlayer playerRef = null;
     private static boolean hasInit;
 
