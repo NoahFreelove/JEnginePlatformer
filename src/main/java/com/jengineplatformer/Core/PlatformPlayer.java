@@ -11,9 +11,7 @@ import com.JEngine.Game.Visual.GameCamera;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.ImageProcessing.GenerateSolidTexture;
 import com.JEngine.Utility.Input;
-import com.jengineplatformer.LevelEditor.EditorRenderer;
-import com.jengineplatformer.LevelEditor.LevelLoader;
-import javafx.scene.Scene;
+import com.jengineplatformer.LevelEditor.EditorManager;
 import javafx.scene.input.KeyCode;
 
 public class PlatformPlayer extends Player {
@@ -81,7 +79,7 @@ public class PlatformPlayer extends Player {
     }
 
     public void die(){
-        EditorRenderer.Play();
+        EditorManager.Play();
     }
 
     public GameCamera getCamera() {

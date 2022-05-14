@@ -7,7 +7,7 @@ import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.jengineplatformer.Core.Enemy;
-import com.jengineplatformer.LevelEditor.EditorRenderer;
+import com.jengineplatformer.LevelEditor.EditorManager;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -34,17 +34,20 @@ public class Main extends Application {
         window.setTargetFPS(60);
         window.setBackgroundColor(Color.BLACK);
 
-        EditorRenderer.LoadEditor();
+        EditorManager.LoadEditor();
 
         stage.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, (event) -> {
             if (event.getCode() == javafx.scene.input.KeyCode.F1) {
-                EditorRenderer.LoadEditor();
+                EditorManager.LoadEditor();
             }
             if (event.getCode() == javafx.scene.input.KeyCode.F2) {
-                EditorRenderer.Play();
+                EditorManager.Play();
             }
             if (event.getCode() == javafx.scene.input.KeyCode.F3) {
                 SceneManager.getActiveScene().add(new Enemy(new Vector3(300,200,0), Vector3.oneVector()));
+            }
+            if (event.getCode() == javafx.scene.input.KeyCode.F4) {
+                System.out.println(EditorManager.playerRef.getPosition());
             }
         });
     }

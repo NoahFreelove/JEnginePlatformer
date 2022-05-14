@@ -10,10 +10,11 @@ import com.jengineplatformer.Main;
 
 import java.io.File;
 
-public class EditorRenderer {
+public class EditorManager {
     public static GameScene editorScene = new GameScene(5, "EditorScene");
     public static CameraControl cameraController = new CameraControl();
     public static String sceneFP = new File("Levels/level").getAbsolutePath();
+    public static PlatformPlayer playerRef = null;
     private static boolean hasInit;
 
     public static void LoadEditor() {
@@ -31,18 +32,18 @@ public class EditorRenderer {
     }
 
     private static void ReloadEditScene(){
-        EditorRenderer.editorScene = new GameScene(5, "EditorScene");
-        LevelLoader.loadFromFile(sceneFP, EditorRenderer.editorScene);
-        SceneManager.switchScene(EditorRenderer.editorScene);
-        ResetCamera(EditorRenderer.cameraController.getCamera(), EditorRenderer.cameraController, true);
-
+        EditorManager.editorScene = new GameScene(5, "EditorScene");
+        LevelLoader.loadFromFile(sceneFP, EditorManager.editorScene);
+        SceneManager.switchScene(EditorManager.editorScene);
+        ResetCamera(EditorManager.cameraController.getCamera(), EditorManager.cameraController, true);
+        EditorManager.playerRef = null;
     }
 
     public static void Play(){
-        EditorRenderer.editorScene = LevelLoader.loadPlayableFromFile(sceneFP);
+        EditorManager.editorScene = LevelLoader.loadPlayableFromFile(sceneFP);
         PlatformPlayer player = null;
         GameCamera playerCamera = null;
-        for (GameObject o:EditorRenderer.editorScene.findObjectsByIdentity("Player", "player", SearchType.SearchByNameAndTag) ) {
+        for (GameObject o: EditorManager.editorScene.findObjectsByIdentity("Player", "player", SearchType.SearchByNameAndTag) ) {
             if(o !=null)
             {
                 player = (PlatformPlayer) o;
@@ -65,13 +66,13 @@ public class EditorRenderer {
      * @param focusOnObject
      */
     public static void ResetCamera(GameCamera camToFocus, GameObject objectToFocus, boolean focusOnObject){
-        EditorRenderer.cameraController = new CameraControl();
+        EditorManager.cameraController = new CameraControl();
         if(focusOnObject)
         {
-            EditorRenderer.editorScene.add(objectToFocus);
+            EditorManager.editorScene.add(objectToFocus);
         }
 
-        EditorRenderer.editorScene.add(camToFocus);
+        EditorManager.editorScene.add(camToFocus);
         SceneManager.setActiveCamera(camToFocus);
     }
 }

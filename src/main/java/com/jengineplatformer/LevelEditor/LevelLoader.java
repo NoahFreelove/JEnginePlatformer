@@ -60,6 +60,7 @@ public class LevelLoader {
                 }
                 else if (line.equalsIgnoreCase("player")){
                     PlatformPlayer pp = new PlatformPlayer(pos);
+                    EditorManager.playerRef = pp;
                     scene.add(pp);
                     count++;
                     continue;

@@ -1,8 +1,6 @@
 package com.jengineplatformer.LevelEditor;
 
-import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Identity;
-import com.JEngine.Core.Position.Direction;
 import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
@@ -17,7 +15,7 @@ public class CameraControl extends Pawn {
 
     public CameraControl() {
         super(Transform.exSimpleTransform(0,0), null, new Identity("CameraController", "controller"));
-        this.camera = new GameCamera(new Vector3(0,0,0), SceneManager.getWindow(), EditorRenderer.editorScene, this, new Identity("EditorCamera", "camera"));
+        this.camera = new GameCamera(new Vector3(0,0,0), SceneManager.getWindow(), EditorManager.editorScene, this, new Identity("EditorCamera", "camera"));
 
     }
 
@@ -42,7 +40,7 @@ public class CameraControl extends Pawn {
         }
         if(Input.Escape_Pressed)
         {
-            EditorRenderer.QuitEditor();
+            EditorManager.QuitEditor();
         }
     }
 
