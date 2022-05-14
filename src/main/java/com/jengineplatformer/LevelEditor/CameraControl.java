@@ -18,12 +18,12 @@ public class CameraControl extends Pawn {
     public CameraControl() {
         super(Transform.exSimpleTransform(0,0), null, new Identity("CameraController", "controller"));
         this.camera = new GameCamera(new Vector3(0,0,0), SceneManager.getWindow(), EditorRenderer.editorScene, this, new Identity("EditorCamera", "camera"));
-        EditorRenderer.editorScene.add(this);
-        EditorRenderer.editorScene.add(camera);
+
     }
 
     @Override
     public void Update(){
+        camera.setPosition(getPosition());
         if(Input.W_Pressed)
         {
             Move(new Vector2(0,-1), moveSpeed);

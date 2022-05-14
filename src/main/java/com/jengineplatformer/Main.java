@@ -1,5 +1,6 @@
 package com.jengineplatformer;
 
+import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.GameCamera;
@@ -25,8 +26,8 @@ public class Main extends Application {
         Text text = new Text("JEngine Platformer");
         text.setFill(Color.WHITE);
         text.setFont(text.getFont().font(50));
-        text.setX(1280/2 - text.getLayoutBounds().getWidth()/2);
-        text.setY(720/2 - text.getLayoutBounds().getHeight()/2);
+        text.setX(640 - text.getLayoutBounds().getWidth()/2);
+        text.setY(360 - text.getLayoutBounds().getHeight()/2);
         mainMenu.addUI(text);
         window.setTargetFPS(60);
         window.setBackgroundColor(Color.BLACK);
@@ -37,14 +38,7 @@ public class Main extends Application {
             if (event.getCode() == javafx.scene.input.KeyCode.F1) {
                 EditorRenderer.LoadEditor();
             }if (event.getCode() == javafx.scene.input.KeyCode.F2) {
-                /*for (GameObject o :
-                        SceneManager.getActiveScene().getObjects()) {
-                    if(o==null)
-                        continue;
-                    System.out.println(o.getIdentity().getName() + o.getPosition());
-                    //System.out.println(System.identityHashCode(o));
-                }*/
-                System.out.println(SceneManager.getActiveScene().getSceneName());
+                EditorRenderer.Play();
             }
         });
     }
