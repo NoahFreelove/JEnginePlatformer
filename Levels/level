@@ -83,19 +83,6 @@ transform
 spike
 END GAMEOBJECT
 
-START GAMEOBJECT
-transform
-1000
-530
-5
-0
-0
-0
-1
-1
-1
-spike
-END GAMEOBJECT
 
 START GAMEOBJECT
 transform
@@ -109,4 +96,18 @@ transform
 0.25f
 0.5f
 wall
+END GAMEOBJECT
+
+START GAMEOBJECT
+transform
+1000
+500
+3
+0
+0
+0
+1
+1
+1
+enemy
 END GAMEOBJECT

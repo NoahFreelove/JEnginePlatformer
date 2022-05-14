@@ -1,12 +1,12 @@
 package com.jengineplatformer;
 
-import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.GameCamera;
 import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.jengineplatformer.Core.Enemy;
 import com.jengineplatformer.LevelEditor.EditorRenderer;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
@@ -18,10 +18,12 @@ import java.io.IOException;
 public class Main extends Application {
     public static GameScene mainMenu = new GameScene(5, "MainMenu");
     public static GameCamera mainCamera;
+
     @Override
     public void start(Stage stage) throws IOException {
         GameWindow window = new GameWindow(mainMenu, 1f, "JEngine Platformer", stage);
         Main.mainCamera = new GameCamera(new Vector3(0,0,0), window, mainMenu, null, new Identity("Main Camera", "camera"));
+
         // create main menu text
         Text text = new Text("JEngine Platformer");
         text.setFill(Color.WHITE);
@@ -37,8 +39,12 @@ public class Main extends Application {
         stage.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, (event) -> {
             if (event.getCode() == javafx.scene.input.KeyCode.F1) {
                 EditorRenderer.LoadEditor();
-            }if (event.getCode() == javafx.scene.input.KeyCode.F2) {
+            }
+            if (event.getCode() == javafx.scene.input.KeyCode.F2) {
                 EditorRenderer.Play();
+            }
+            if (event.getCode() == javafx.scene.input.KeyCode.F3) {
+                SceneManager.getActiveScene().add(new Enemy(new Vector3(300,200,0), Vector3.oneVector()));
             }
         });
     }

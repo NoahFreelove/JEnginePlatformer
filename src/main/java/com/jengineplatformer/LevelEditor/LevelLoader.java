@@ -8,6 +8,8 @@ import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.ImageProcessing.GenerateSolidTexture;
+import com.JEngine.Utility.ImageProcessing.MissingTexture;
+import com.jengineplatformer.Core.Enemy;
 import com.jengineplatformer.Core.PlatformPlayer;
 import com.jengineplatformer.Core.Spike;
 import com.jengineplatformer.Core.Wall;
@@ -68,6 +70,13 @@ public class LevelLoader {
                     count++;
                     continue;
                 }
+                else if(line.equalsIgnoreCase("enemy"))
+                {
+                    Enemy enemy = new Enemy(pos, scale);
+                    scene.add(enemy);
+                    count++;
+                    continue;
+                }
             }
             if(line.equalsIgnoreCase("START GAMEOBJECT"))
             {
@@ -124,6 +133,12 @@ public class LevelLoader {
                 }
                 else if (line.equalsIgnoreCase("spike")){
                     Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage("images/spike.png"), new Identity("Spike", "spike"));
+                    editorScene.add(sprite);
+                    continue;
+                }
+                else if(line.equalsIgnoreCase("enemy"))
+                {
+                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(MissingTexture.getMissingTextureImage(64,64)), new Identity("Enemy", "enemy"));
                     editorScene.add(sprite);
                     continue;
                 }

@@ -29,8 +29,7 @@ public class PlatformPlayer extends Player {
     public PlatformPlayer(Vector3 position) {
         super(new Transform(position, Vector3.emptyVector(), Vector3.oneVector()), new GameImage(GenerateSolidTexture.generateImage(64,64,0xFF55FF45)), new Identity("Player","player"));
         physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.defaultGravity());
-        addComponent(new PlayerCollider(new Vector3(0,0,0), 64, 64, false, this));
-        addComponent(physicsBody);
+        addComponents(new PlayerCollider(new Vector3(0,0,0), 64, 64, false, this), physicsBody);
         this.camera = new GameCamera(getPosition(), SceneManager.getWindow(), SceneManager.getActiveScene(), this, new Identity("PlayerCamera","camera"));
         camera.setFocus(this);
         camera.setFocusOffset(new Vector2(0,-100));
@@ -87,5 +86,9 @@ public class PlatformPlayer extends Player {
 
     public GameCamera getCamera() {
         return camera;
+    }
+
+    public boolean isStrongGravity() {
+        return isStrongGravity;
     }
 }

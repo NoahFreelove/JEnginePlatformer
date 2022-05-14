@@ -5,9 +5,10 @@ import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Position.Vector3;
 
 public class PlayerCollider extends Collider_Comp {
-
+    PlatformPlayer player;
     public PlayerCollider(Vector3 initialOffset, float width, float height, boolean isTrigger, GameObject parent) {
         super(initialOffset, width, height, isTrigger, parent);
+        player = (PlatformPlayer) parent;
     }
 
     @Override
@@ -44,8 +45,17 @@ public class PlayerCollider extends Collider_Comp {
 
     @Override
     public void onHit(Collider_Comp other) {
-        if(other.getParent().getIdentity().compareTag("spike")){
-            ((PlatformPlayer)getParent()).die();
+        if(player == null)
+            return;
+        switch (other.getParent().getIdentity().getTag()) {
+            case "spike" -> player.die();
+            case "enemy" -> {
+                if (player.isStrongGravity()) {
+                    ((Enemy) other.getParent()).die();
+                } else {
+                    player.die();
+                }
+            }
         }
     }
 }
