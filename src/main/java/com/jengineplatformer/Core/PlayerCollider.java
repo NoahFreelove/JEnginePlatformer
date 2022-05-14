@@ -50,7 +50,7 @@ public class PlayerCollider extends Collider_Comp {
         switch (other.getParent().getIdentity().getTag()) {
             case "spike" -> player.die();
             case "enemy" -> {
-                if (player.isStrongGravity()) {
+                if (player.isStrongGravity() && !player.getPhysicsBody().isOnGround()) {
                     ((Enemy) other.getParent()).die();
                 } else {
                     player.die();

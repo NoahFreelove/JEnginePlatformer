@@ -89,4 +89,8 @@ public class PlatformPlayer extends Player {
     public boolean isStrongGravity() {
         return isStrongGravity;
     }
+
+    public PhysicsBody_Comp getPhysicsBody() {
+        return physicsBody;
+    }
 }

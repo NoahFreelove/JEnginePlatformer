@@ -24,12 +24,14 @@ public class Enemy extends Pawn {
 
     private GameObject[] patrolPoints = new GameObject[]{
             new GameObject(new Vector2(700,535)),
-            new GameObject(new Vector2(900,535))
+            new GameObject(new Vector2(1100,535))
     };
-    private GenericMethod success = new GenericMethod() {
+
+    private GenericMethod onPatrolSuccess = new GenericMethod() {
         @Override
         public void call(Object[] args) {
-            System.out.println(patrolIndex);
+            float timeInSeconds = ((long)args[0])/1000.0f;
+            //System.out.println("Patrol took: " + timeInSeconds + " Seconds");
             patrolIndex++;
             if(patrolIndex == patrolPoints.length)
             {
@@ -44,7 +46,7 @@ public class Enemy extends Pawn {
         enemyCollider = new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this);
         physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.defaultGravity());
         patrol = new Pathfinding_Comp(patrolPoints[0]);
-        patrol.setOnTargetReachedEvent(success);
+        patrol.setOnTargetReachedEvent(onPatrolSuccess);
         addComponents(enemyCollider, physicsBody, patrol);
     }
     public Enemy(Transform transform, GameImage image, String name) {
@@ -52,7 +54,7 @@ public class Enemy extends Pawn {
         enemyCollider = new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this);
         physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.defaultGravity());
         patrol = new Pathfinding_Comp(EditorManager.playerRef);
-        patrol.setOnTargetReachedEvent(success);
+        patrol.setOnTargetReachedEvent(onPatrolSuccess);
 
         addComponents(enemyCollider, physicsBody, patrol);
     }
