@@ -5,6 +5,7 @@ import com.JEngine.Game.Visual.GameCamera;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Game.Visual.SearchType;
+import com.JEngine.Utility.GameMath;
 import com.jengineplatformer.Core.PlatformPlayer;
 import com.jengineplatformer.Main;
 
@@ -12,12 +13,15 @@ import java.io.File;
 
 public class EditorManager {
     public static GameScene editorScene = new GameScene(5, "EditorScene");
-    public static CameraControl cameraController = new CameraControl();
+    public static EditorCamera editorCameraController = new EditorCamera();
     public static EditorPointer pointer = new EditorPointer();
     public static String sceneFP = new File("Levels/level2").getAbsolutePath();
     public static PlatformPlayer playerRef = null;
     private static boolean hasInit;
     private static boolean isPlaying;
+
+    private static EditorActionHistory[] actionHistory = new EditorActionHistory[25];
+    private static int actionIndex;
 
     public static void LoadEditor() {
         if (!hasInit)
@@ -34,24 +38,24 @@ public class EditorManager {
     }
 
     private static void ReloadEditScene(){
-        EditorManager.editorScene = new GameScene(5, "EditorScene");
-        LevelLoader.loadFromFile(sceneFP, EditorManager.editorScene);
-        SceneManager.switchScene(EditorManager.editorScene);
-        ResetCamera(EditorManager.cameraController.getCamera(), EditorManager.cameraController, true);
-        EditorManager.playerRef = null;
-        EditorManager.editorScene.add(pointer);
-        EditorManager.pointer.setActive(true);
-        EditorManager.setIsPlaying(false);
+        editorScene = new GameScene(5, "EditorScene");
+        LevelLoader.loadFromFile(sceneFP, editorScene);
+        SceneManager.switchScene(editorScene);
+        ResetCamera(editorCameraController.getCamera(), editorCameraController, true);
+        playerRef = null;
+        editorScene.add(pointer);
+        pointer.setActive(true);
+        setIsPlaying(false);
     }
 
     public static void Play(){
-        EditorManager.setIsPlaying(true);
+        setIsPlaying(true);
 
         // Load the playable scene from the filepath
-        EditorManager.editorScene = LevelLoader.loadPlayableFromFile(sceneFP);
+        editorScene = LevelLoader.loadPlayableFromFile(sceneFP);
 
         // Don't let the pointer add objects into the scene when we're playing!
-        EditorManager.pointer.setActive(false);
+        pointer.setActive(false);
 
         // We need to search for the player instance, so we can focus the camera around them
         PlatformPlayer player = null;
@@ -81,13 +85,13 @@ public class EditorManager {
      * @param focusOnObject // whether to focus on an object or not
      */
     public static void ResetCamera(GameCamera camToFocus, GameObject objectToFocus, boolean focusOnObject){
-        EditorManager.cameraController = new CameraControl(); // if in the editor, reset the camera's position
+        editorCameraController = new EditorCamera(); // if in the editor, reset the camera's position
         if(focusOnObject)
         {
             EditorManager.editorScene.add(objectToFocus);
         }
 
-        EditorManager.editorScene.add(camToFocus);
+        editorScene.add(camToFocus);
         SceneManager.setActiveCamera(camToFocus);
     }
 
@@ -97,5 +101,39 @@ public class EditorManager {
 
     public static void setIsPlaying(boolean isPlaying) {
         EditorManager.isPlaying = isPlaying;
+    }
+
+    public static void AddEditorAction(EditorActionHistory newAction) {
+        actionHistory[actionIndex] = newAction;
+        actionIndex++;
+        if (actionIndex >= actionHistory.length)
+        {
+            // set first index to null and shift everything down
+            actionHistory[0] = null;
+            System.arraycopy(actionHistory, 1, actionHistory, 0, actionHistory.length - 1);
+            actionIndex = actionHistory.length - 1;
+        }
+
+    }
+
+    public static void Undo(){
+        EditorActionHistory editorAction = actionHistory[actionIndex-1];
+        if(actionHistory[actionIndex-1] == null)
+            return;
+
+        if(editorAction.action == EditorAction.ADD)
+        {
+
+            editorAction.object.setActive(false);
+            editorScene.remove(editorAction.object);
+        }
+        else if (editorAction.action == EditorAction.DELETE)
+        {
+            editorAction.object.setActive(true);
+            editorAction.object.setQueuedForDeletion(false);
+            editorScene.add(editorAction.object);
+        }
+        actionIndex--;
+        actionIndex = GameMath.clamp(0,actionHistory.length, actionIndex);
     }
 }

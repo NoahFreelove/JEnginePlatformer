@@ -41,13 +41,20 @@ public class EditorPointer extends MousePointer {
     private void placeObject(){
         if(!getActive())
             return;
+
         Vector2 clickDelta = startClickPos.subtract(endClickPos);
+        Vector2 objectPlacePosition = new Vector2(startClickPos.x, startClickPos.y);
         float scaleX;
         float scaleY;
-        Vector2 pos = new Vector2(startClickPos.x, startClickPos.y);
+
+        int index = ObjectDictionary.nameToIntIndex(selectedObject);
+        boolean canBeStretched = ObjectDictionary.nameToCanBeStretched(selectedObject);
+
+        if(index == -1)
+            return;
 
         // Don't create any object smaller than 5x5 units
-        if(ObjectDictionary.nameToCanBeStretched(selectedObject))
+        if(canBeStretched)
         {
             if(Math.abs(clickDelta.x)< 5)
                 return;
@@ -55,13 +62,10 @@ public class EditorPointer extends MousePointer {
                 return;
         }
 
-        if(ObjectDictionary.nameToIntIndex(selectedObject) == -1)
-            return;
-
         // scale object based on cursor start and end positions
         if(clickDelta.x > 0){
             scaleX = clickDelta.x/128f;
-            pos.x -= clickDelta.x;
+            objectPlacePosition.x -= clickDelta.x;
         }
         else{
             scaleX = -clickDelta.x/128f;
@@ -69,25 +73,33 @@ public class EditorPointer extends MousePointer {
 
         if(clickDelta.y > 0){
             scaleY = clickDelta.y/128f;
-            pos.y -= clickDelta.y;
+            objectPlacePosition.y -= clickDelta.y;
         }
         else{
             scaleY = -clickDelta.y/128f;
         }
+        Sprite newObject;
+
         if(ObjectDictionary.nameToCanBeStretched(selectedObject))
         {
-            EditorManager.editorScene.add(new Sprite(new Transform(new Vector3(pos, 2), Vector3.emptyVector(), new Vector3(scaleX,scaleY,1)),
-                    ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex(selectedObject)],
-                    new Identity("levelEditorObject", selectedObject)));
+            newObject = new Sprite(new Transform(new Vector3(objectPlacePosition, 2), Vector3.emptyVector(), new Vector3(scaleX,scaleY,1)),
+                    ObjectDictionary.objectImages[index],
+                    new Identity("levelEditorObject", selectedObject));
+            EditorManager.editorScene.add(newObject);
         }
         else {
-            GameImage image = new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex(selectedObject)]);
+            GameImage image = new GameImage(ObjectDictionary.objectImages[index]);
+
+            // Center object around cursor
             endClickPos.x -= image.getWidth()/2f;
             endClickPos.y -= image.getHeight()/2f;
 
-            EditorManager.editorScene.add(new Sprite(new Transform(new Vector3(endClickPos, 2), Vector3.emptyVector(), Vector3.oneVector()),
-                    image, new Identity("levelEditorObject", selectedObject)));
+            newObject = new Sprite(new Transform(new Vector3(endClickPos, 2), Vector3.emptyVector(), Vector3.oneVector()),
+                    image, new Identity("levelEditorObject", selectedObject));
+            EditorManager.editorScene.add(newObject);
         }
+        EditorManager.AddEditorAction(new EditorActionHistory(EditorAction.ADD, newObject));
+
     }
     private void deleteObject(){
         if(!getActive())
@@ -113,11 +125,15 @@ public class EditorPointer extends MousePointer {
                     if(yPos < cursorYPos && cursorYPos < yPos2)
                     {
                         EditorManager.editorScene.remove(obj);
+                        EditorManager.AddEditorAction(new EditorActionHistory(EditorAction.DELETE, obj));
+
+                        break;
                     }
                 }
 
             }
         }
+
     }
 
     public void setAddedPlayer(boolean addedPlayer) {
