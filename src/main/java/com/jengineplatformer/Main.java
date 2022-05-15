@@ -45,10 +45,7 @@ public class Main extends Application {
                 EditorManager.Play();
             }
             if (event.getCode() == javafx.scene.input.KeyCode.F3) {
-                LevelSaver.SaveLevel(EditorManager.editorScene, "Levels/level2");
-            }
-            if (event.getCode() == javafx.scene.input.KeyCode.F4) {
-                System.out.println(EditorManager.playerRef.getPosition());
+                LevelSaver.SaveLevel(EditorManager.editorScene, EditorManager.sceneFP);
             }
         });
     }

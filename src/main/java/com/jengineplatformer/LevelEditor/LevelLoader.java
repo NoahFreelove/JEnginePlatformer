@@ -10,6 +10,10 @@ import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.ImageProcessing.GenerateSolidTexture;
 import com.JEngine.Utility.ImageProcessing.MissingTexture;
 import com.jengineplatformer.Core.*;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 import java.io.File;
 
@@ -97,6 +101,14 @@ public class LevelLoader {
     public static void loadFromFile(String filePath, GameScene editorScene){
         String[] loadedLines = FileOperations.fileToStringArr(new File(filePath).getAbsolutePath());
 
+        //Create help text at the top left of the screen
+        Text helpText = new Text("WASD - Movement\nLeft Click - Place Object\nRight Click - Remove Object\nCtr+Z - Undo\nNumber Keys - Select Object\nF1 - Reload Editor\nF2 - Play (don't forget to save)\nF3 - Save");
+        helpText.setFill(Color.WHITE);
+        helpText.setFont(Font.font("Verdana", FontWeight.LIGHT, 10));
+        helpText.setX(10);
+        helpText.setY(30);
+        editorScene.addUI(helpText);
+
         boolean inObject = false;
         Vector3 pos = new Vector3(0,0,0);
         Vector3 rot = new Vector3(0,0,0);
@@ -108,21 +120,9 @@ public class LevelLoader {
             if(inObject)
             {
                 if(line.equalsIgnoreCase("transform")){
-                    pos = new Vector3(0,0,0);
-                    rot = new Vector3(0,0,0);
-                    scale = new Vector3(0,0,0);
-
-                    pos.x = Float.parseFloat(loadedLines[i+1]);
-                    pos.y = Float.parseFloat(loadedLines[i+2]);
-                    pos.z= Float.parseFloat(loadedLines[i+3]);
-
-                    rot.x = Float.parseFloat(loadedLines[i+4]);
-                    rot.y = Float.parseFloat(loadedLines[i+5]);
-                    rot.z= Float.parseFloat(loadedLines[i+6]);
-
-                    scale.x = Float.parseFloat(loadedLines[i+7]);
-                    scale.y = Float.parseFloat(loadedLines[i+8]);
-                    scale.z= Float.parseFloat(loadedLines[i+9]);
+                    pos = new Vector3(Float.parseFloat(loadedLines[i+1]),Float.parseFloat(loadedLines[i+2]),Float.parseFloat(loadedLines[i+3]));
+                    rot = new Vector3(Float.parseFloat(loadedLines[i+4]),Float.parseFloat(loadedLines[i+5]),Float.parseFloat(loadedLines[i+6]));
+                    scale = new Vector3(Float.parseFloat(loadedLines[i+7]),Float.parseFloat(loadedLines[i+8]),Float.parseFloat(loadedLines[i+9]));
                     i+=9;
                     continue;
                 }

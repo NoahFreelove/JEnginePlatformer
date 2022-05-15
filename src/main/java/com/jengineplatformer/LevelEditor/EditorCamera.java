@@ -75,6 +75,11 @@ public class EditorCamera extends Player {
             }
         }
 
+        if(key == KeyCode.ESCAPE)
+        {
+            EditorManager.QuitEditor();
+        }
+
     }
 
 
