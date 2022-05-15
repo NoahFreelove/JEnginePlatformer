@@ -5,11 +5,13 @@ import com.JEngine.Core.Position.Transform;
 import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
+import com.JEngine.Game.PlayersAndPawns.Player;
 import com.JEngine.Game.Visual.GameCamera;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.Input;
+import javafx.scene.input.KeyCode;
 
-public class CameraControl extends Pawn {
+public class CameraControl extends Player {
     private final GameCamera camera;
     private float moveSpeed = 10;
 
@@ -41,6 +43,29 @@ public class CameraControl extends Pawn {
         {
             EditorManager.QuitEditor();
         }
+    }
+
+    @Override
+    public void onKeyReleased(KeyCode key)
+    {
+        if(key == KeyCode.DIGIT1)
+        {
+            EditorManager.pointer.setSelectedObject("wall");
+        }
+        else if (key == KeyCode.DIGIT2)
+        {
+            EditorManager.pointer.setSelectedObject("spike");
+        }
+        else if (key == KeyCode.DIGIT3)
+        {
+            EditorManager.pointer.setSelectedObject("enemy");
+        }
+        else if (key == KeyCode.DIGIT4)
+        {
+            EditorManager.pointer.setSelectedObject("player");
+        }
+
+
     }
 
 

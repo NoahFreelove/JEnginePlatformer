@@ -15,6 +15,8 @@ public class LevelSaver {
         for (GameObject obj: scene.getObjects()) {
             if(obj == null)
                 continue;
+            if(!obj.getActive() || obj.isQueuedForDeletion())
+                continue;
             String tag = obj.getIdentity().getTag();
             if(ObjectDictionary.nameToIntIndex(tag) == -1)
             {
