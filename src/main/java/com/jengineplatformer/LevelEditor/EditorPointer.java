@@ -33,7 +33,7 @@ public class EditorPointer extends MousePointer {
     }
 
     @Override
-    protected void onMousePressed(){
+    protected void onMousePressed(boolean leftClick){
         startClickPos = pointerPosToWorldPoint();
     }
 

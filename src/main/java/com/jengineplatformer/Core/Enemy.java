@@ -14,6 +14,7 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.ImageProcessing.MissingTexture;
 import com.JEngine.Utility.Misc.GenericMethod;
 import com.jengineplatformer.LevelEditor.EditorManager;
+import com.jengineplatformer.LevelEditor.ObjectDictionary;
 
 public class Enemy extends Pawn {
     private BoxCollider_Comp enemyCollider;
@@ -42,7 +43,7 @@ public class Enemy extends Pawn {
     };
 
     public Enemy(Vector3 initPos, Vector3 initScale) {
-        super(new Transform(initPos, Vector3.emptyVector(), initScale), new GameImage(MissingTexture.getMissingTextureImage(64, 64)), new Identity("Enemy", "enemy"));
+        super(new Transform(initPos, Vector3.emptyVector(), initScale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("enemy")]), new Identity("Enemy", "enemy"));
         enemyCollider = new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this);
         physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.defaultGravity());
         patrol = new Pathfinding_Comp(patrolPoints[0]);

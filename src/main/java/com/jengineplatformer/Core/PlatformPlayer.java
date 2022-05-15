@@ -12,6 +12,7 @@ import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.ImageProcessing.GenerateSolidTexture;
 import com.JEngine.Utility.Input;
 import com.jengineplatformer.LevelEditor.EditorManager;
+import com.jengineplatformer.LevelEditor.ObjectDictionary;
 import javafx.scene.input.KeyCode;
 
 public class PlatformPlayer extends Player {
@@ -25,7 +26,7 @@ public class PlatformPlayer extends Player {
     private boolean isStrongGravity;
 
     public PlatformPlayer(Vector3 position) {
-        super(new Transform(position, Vector3.emptyVector(), Vector3.oneVector()), new GameImage(GenerateSolidTexture.generateImage(64,64,0xFF55FF45)), new Identity("Player","player"));
+        super(new Transform(position, Vector3.emptyVector(), Vector3.oneVector()), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("player")]), new Identity("Player","player"));
         physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.defaultGravity());
         addComponents(new PlayerCollider(new Vector3(0,0,0), 64, 64, false, this), physicsBody);
         this.camera = new GameCamera(getPosition(), SceneManager.getWindow(), SceneManager.getActiveScene(), this, new Identity("PlayerCamera","camera"));

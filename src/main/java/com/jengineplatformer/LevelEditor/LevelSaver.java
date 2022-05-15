@@ -9,6 +9,8 @@ import java.io.File;
 public class LevelSaver {
     public static void SaveLevel(GameScene scene, String filepath)
     {
+        if(EditorManager.isPlaying())
+            return;
         String[] data = new String[3000];
         int i = 0;
         data[0] = scene.getSceneName();

@@ -53,7 +53,7 @@ public class LevelLoader {
                     continue;
                 }
                 else if (line.equalsIgnoreCase("wall")){
-                    Wall w = new Wall(pos, scale, new GameImage(GenerateSolidTexture.generateImage(128,128,0xFFFFFFFF)), "Wall"+count);
+                    Wall w = new Wall(pos, scale, new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("wall")]), "Wall"+count);
                     scene.add(w);
                     count++;
                     continue;

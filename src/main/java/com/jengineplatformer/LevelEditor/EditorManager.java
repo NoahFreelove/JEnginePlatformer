@@ -17,6 +17,7 @@ public class EditorManager {
     public static String sceneFP = new File("Levels/level2").getAbsolutePath();
     public static PlatformPlayer playerRef = null;
     private static boolean hasInit;
+    private static boolean isPlaying;
 
     public static void LoadEditor() {
         if (!hasInit)
@@ -40,9 +41,12 @@ public class EditorManager {
         EditorManager.playerRef = null;
         EditorManager.editorScene.add(pointer);
         EditorManager.pointer.setActive(true);
+        EditorManager.setIsPlaying(false);
     }
 
     public static void Play(){
+        EditorManager.setIsPlaying(true);
+
         // Load the playable scene from the filepath
         EditorManager.editorScene = LevelLoader.loadPlayableFromFile(sceneFP);
 
@@ -85,5 +89,13 @@ public class EditorManager {
 
         EditorManager.editorScene.add(camToFocus);
         SceneManager.setActiveCamera(camToFocus);
+    }
+
+    public static boolean isPlaying() {
+        return isPlaying;
+    }
+
+    public static void setIsPlaying(boolean isPlaying) {
+        EditorManager.isPlaying = isPlaying;
     }
 }
