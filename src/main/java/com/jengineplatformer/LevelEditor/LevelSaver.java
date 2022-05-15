@@ -11,7 +11,7 @@ public class LevelSaver {
     {
         if(EditorManager.isPlaying())
             return;
-        String[] data = new String[3000];
+        String[] data = new String[scene.getObjects().length*15];
         int i = 0;
         data[0] = scene.getSceneName();
         for (GameObject obj: scene.getObjects()) {

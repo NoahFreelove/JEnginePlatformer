@@ -112,7 +112,6 @@ public class EditorPointer extends MousePointer {
                 {
                     if(yPos < cursorYPos && cursorYPos < yPos2)
                     {
-                        System.out.println("Removed Object");
                         EditorManager.editorScene.remove(obj);
                     }
                 }

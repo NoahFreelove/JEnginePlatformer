@@ -11,7 +11,8 @@ public class ObjectDictionary {
             new GameImage(GenerateSolidTexture.generateImage(128,128,0xFFFFFFFF)),
             new GameImage("images/spike.png"),
             new GameImage(GenerateSolidTexture.generateImage(64,64,0xFF55FF45)),
-            new GameImage(MissingTexture.getMissingTextureImage(64,64))
+            new GameImage(MissingTexture.getMissingTextureImage(64,64)),
+            new GameImage(GenerateSolidTexture.generateImage(128,128,0xFFFF00FF)),
     };
 
     public static int nameToIntIndex(String objectName){
@@ -20,6 +21,7 @@ public class ObjectDictionary {
             case "spike" -> 1;
             case "player" -> 2;
             case "enemy" -> 3;
+            case "breakablewall" -> 4;
             default -> -1;
         };
     }
@@ -27,8 +29,7 @@ public class ObjectDictionary {
     public static boolean nameToCanBeStretched(String objectName)
     {
         return switch (objectName.toLowerCase(Locale.ROOT)) {
-            case "wall" -> true;
-
+            case "wall", "breakablewall" -> true;
             default -> false;
         };
     }

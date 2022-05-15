@@ -64,6 +64,10 @@ public class CameraControl extends Player {
         {
             EditorManager.pointer.setSelectedObject("player");
         }
+        if(key == KeyCode.DIGIT5)
+        {
+            EditorManager.pointer.setSelectedObject("breakablewall");
+        }
 
 
     }

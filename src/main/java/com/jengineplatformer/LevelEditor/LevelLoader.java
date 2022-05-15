@@ -9,10 +9,7 @@ import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.IO.FileOperations;
 import com.JEngine.Utility.ImageProcessing.GenerateSolidTexture;
 import com.JEngine.Utility.ImageProcessing.MissingTexture;
-import com.jengineplatformer.Core.Enemy;
-import com.jengineplatformer.Core.PlatformPlayer;
-import com.jengineplatformer.Core.Spike;
-import com.jengineplatformer.Core.Wall;
+import com.jengineplatformer.Core.*;
 
 import java.io.File;
 
@@ -78,6 +75,13 @@ public class LevelLoader {
                     count++;
                     continue;
                 }
+                else if(line.equalsIgnoreCase("breakablewall"))
+                {
+                    BreakableWall w = new BreakableWall(pos, scale, new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("breakablewall")]), "Wall"+count);
+                    scene.add(w);
+                    count++;
+                    continue;
+                }
             }
             if(line.equalsIgnoreCase("START GAMEOBJECT"))
             {
@@ -123,23 +127,29 @@ public class LevelLoader {
                     continue;
                 }
                 else if (line.equalsIgnoreCase("wall")){
-                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(GenerateSolidTexture.generateImage(128,128,0xFFFFFFFF)), new Identity("Wall", "wall"));
+                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("wall")]), new Identity("Wall", "wall"));
                     editorScene.add(sprite);
                     continue;
                 }
                 else if (line.equalsIgnoreCase("player")){
-                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(GenerateSolidTexture.generateImage(64,64,0xFF55FF45)), new Identity("Player", "player"));
+                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("player")]), new Identity("Player", "player"));
                     editorScene.add(sprite);
                     continue;
                 }
                 else if (line.equalsIgnoreCase("spike")){
-                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage("images/spike.png"), new Identity("Spike", "spike"));
+                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("spike")]), new Identity("Spike", "spike"));
                     editorScene.add(sprite);
                     continue;
                 }
                 else if(line.equalsIgnoreCase("enemy"))
                 {
-                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(MissingTexture.getMissingTextureImage(64,64)), new Identity("Enemy", "enemy"));
+                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("enemy")]), new Identity("Enemy", "enemy"));
+                    editorScene.add(sprite);
+                    continue;
+                }
+                else if(line.equalsIgnoreCase("breakablewall"))
+                {
+                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("breakablewall")]), new Identity("Breakablewall", "breakablewall"));
                     editorScene.add(sprite);
                     continue;
                 }

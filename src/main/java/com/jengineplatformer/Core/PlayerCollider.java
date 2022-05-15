@@ -56,6 +56,11 @@ public class PlayerCollider extends Collider_Comp {
                     player.die();
                 }
             }
+            case "breakablewall" ->{
+                if (player.isStrongGravity() && !player.getPhysicsBody().isOnGround()) {
+                    ((BreakableWall) other.getParent()).DestroyWall();
+                }
+            }
         }
     }
 }
