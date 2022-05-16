@@ -51,7 +51,7 @@ public class PlatformPlayer extends Player {
         super.Update();
     }
 
-    private void jump(){
+    public void jump(){
         if(physicsBody.isOnGround())
         {
             physicsBody.addVelocity(new Vector2(0,-15));

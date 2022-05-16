@@ -1,4 +1,4 @@
-package com.jengineplatformer.Core;
+package com.jengineplatformer.Objects;
 
 import com.JEngine.Components.Colliders.BoxCollider_Comp;
 import com.JEngine.Components.Pathfinding_Comp;
@@ -11,7 +11,6 @@ import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Pawn;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
-import com.JEngine.Utility.ImageProcessing.MissingTexture;
 import com.JEngine.Utility.Misc.GenericMethod;
 import com.jengineplatformer.LevelEditor.EditorManager;
 import com.jengineplatformer.LevelEditor.ObjectDictionary;

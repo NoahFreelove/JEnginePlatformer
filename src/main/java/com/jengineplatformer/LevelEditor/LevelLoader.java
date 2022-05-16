@@ -7,9 +7,8 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.IO.FileOperations;
-import com.JEngine.Utility.ImageProcessing.GenerateSolidTexture;
-import com.JEngine.Utility.ImageProcessing.MissingTexture;
 import com.jengineplatformer.Core.*;
+import com.jengineplatformer.Objects.*;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
@@ -85,6 +84,11 @@ public class LevelLoader {
                     scene.add(w);
                     count++;
                     continue;
+                } else if (line.equalsIgnoreCase("boostpad")) {
+                    Boostpad bp = new Boostpad(pos, 64,32,"Boost-Pad");
+                    scene.add(bp);
+                    count++;
+                    continue;
                 }
             }
             if(line.equalsIgnoreCase("START GAMEOBJECT"))
@@ -108,10 +112,10 @@ public class LevelLoader {
                 Right Click - Remove Object
                 Ctr+Z - Undo
                 Number Keys - Select Object
-                F1 - Reload Editor
+                F1 - Load Editor (load from tmp file)
                 F2 - Play (save to tmp file)
                 F3 - Save
-                F4 - Load Editor (load from tmp file)
+                F4 - Reload Editor
                 Escape - Quit Editor
                 """);
         helpText.setFill(Color.WHITE);
@@ -161,6 +165,12 @@ public class LevelLoader {
                 else if(line.equalsIgnoreCase("breakablewall"))
                 {
                     Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("breakablewall")]), new Identity("Breakablewall", "breakablewall"));
+                    editorScene.add(sprite);
+                    continue;
+                }
+                else if(line.equalsIgnoreCase("boostpad"))
+                {
+                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("boostpad")]), new Identity("Boost-Pad", "boostpad"));
                     editorScene.add(sprite);
                     continue;
                 }

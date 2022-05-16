@@ -2,10 +2,15 @@ package com.jengineplatformer.Core;
 
 import com.JEngine.Components.Colliders.Collider_Comp;
 import com.JEngine.Core.GameObject;
+import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
+import com.jengineplatformer.Objects.Boostpad;
+import com.jengineplatformer.Objects.BreakableWall;
+import com.jengineplatformer.Objects.Enemy;
 
 public class PlayerCollider extends Collider_Comp {
     PlatformPlayer player;
+    boolean boostpadFrameDelay;
     public PlayerCollider(Vector3 initialOffset, float width, float height, boolean isTrigger, GameObject parent) {
         super(initialOffset, width, height, isTrigger, parent);
         player = (PlatformPlayer) parent;
@@ -60,6 +65,10 @@ public class PlayerCollider extends Collider_Comp {
                 if (player.isStrongGravity() && !player.getPhysicsBody().isOnGround()) {
                     ((BreakableWall) other.getParent()).DestroyWall();
                 }
+            }
+            case "boostpad" -> {
+                player.getPhysicsBody().setOnGround(false);
+                player.getPhysicsBody().addVelocity(new Vector2(0,-15));
             }
         }
     }

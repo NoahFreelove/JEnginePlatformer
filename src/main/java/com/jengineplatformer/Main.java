@@ -5,8 +5,6 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.GameCamera;
 import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.GameScene;
-import com.JEngine.Game.Visual.Scenes.SceneManager;
-import com.jengineplatformer.Core.Enemy;
 import com.jengineplatformer.LevelEditor.EditorManager;
 import com.jengineplatformer.LevelEditor.LevelSaver;
 import javafx.application.Application;
@@ -16,7 +14,7 @@ import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+import java.io.*;
 
 public class Main extends Application {
     public static GameScene mainMenu = new GameScene(5, "MainMenu");
@@ -40,7 +38,7 @@ public class Main extends Application {
         EditorManager.LoadEditor();
 
         stage.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, (event) -> {
-            if (event.getCode() == javafx.scene.input.KeyCode.F1) {
+            if (event.getCode() == javafx.scene.input.KeyCode.F4) {
                 EditorManager.ReloadEditScene(false);
             }
             if (event.getCode() == javafx.scene.input.KeyCode.F2) {
@@ -49,7 +47,7 @@ public class Main extends Application {
             if (event.getCode() == javafx.scene.input.KeyCode.F3) {
                 LevelSaver.SaveLevel(EditorManager.editorScene, EditorManager.sceneFP);
             }
-            if (event.getCode() == javafx.scene.input.KeyCode.F4) {
+            if (event.getCode() == javafx.scene.input.KeyCode.F1) {
                 EditorManager.ReloadEditScene(true);
             }
         });

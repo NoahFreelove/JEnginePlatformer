@@ -45,41 +45,23 @@ public class EditorCamera extends Player {
     }
 
     @Override
-    public void onKeyReleased(KeyCode key)
-    {
-        if(key == KeyCode.DIGIT1)
+    public void onKeyReleased(KeyCode key) {
+        switch (key)
         {
-            EditorManager.pointer.setSelectedObject("wall");
-        }
-        else if (key == KeyCode.DIGIT2)
-        {
-            EditorManager.pointer.setSelectedObject("spike");
-        }
-        else if (key == KeyCode.DIGIT3)
-        {
-            EditorManager.pointer.setSelectedObject("enemy");
-        }
-        else if (key == KeyCode.DIGIT4)
-        {
-            EditorManager.pointer.setSelectedObject("player");
-        }
-        if(key == KeyCode.DIGIT5)
-        {
-            EditorManager.pointer.setSelectedObject("breakablewall");
-        }
-        if(key == KeyCode.Z)
-        {
-            if (Input.Control_Pressed)
-            {
-                EditorManager.Undo();
+            case DIGIT1 -> EditorManager.pointer.setSelectedObject("wall");
+            case DIGIT2 -> EditorManager.pointer.setSelectedObject("spike");
+            case DIGIT3 -> EditorManager.pointer.setSelectedObject("enemy");
+            case DIGIT4 -> EditorManager.pointer.setSelectedObject("player");
+            case DIGIT5 -> EditorManager.pointer.setSelectedObject("breakablewall");
+            case DIGIT6 -> EditorManager.pointer.setSelectedObject("boostpad");
+            case Z -> {
+                if (Input.Control_Pressed)
+                {
+                    EditorManager.Undo();
+                }
             }
+            case ESCAPE -> EditorManager.QuitEditor();
         }
-
-        if(key == KeyCode.ESCAPE)
-        {
-            EditorManager.QuitEditor();
-        }
-
     }
 
 

@@ -1,4 +1,4 @@
-package com.jengineplatformer.Core;
+package com.jengineplatformer.Objects;
 
 import com.JEngine.Components.Colliders.BoxCollider_Comp;
 import com.JEngine.Core.GameImage;
