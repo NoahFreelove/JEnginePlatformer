@@ -80,7 +80,7 @@ public class PlatformPlayer extends Player {
     }
 
     public void die(){
-        EditorManager.Play();
+        EditorManager.Play(true);
     }
 
     public GameCamera getCamera() {

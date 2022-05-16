@@ -30,16 +30,27 @@ public class EditorManager {
             InitEditor();
         }
         //ReloadEditScene();
-        ReloadEditScene();
+        ReloadEditScene(false);
+    }
+
+    public static void PlayTempScene(){
+        LevelSaver.SaveLevel(editorScene, "Levels/tmp");
+        Play(true);
     }
 
     private static void InitEditor(){
 
     }
 
-    private static void ReloadEditScene(){
+    public static void ReloadEditScene(boolean loadTmp){
         editorScene = new GameScene(5, "EditorScene");
-        LevelLoader.loadFromFile(sceneFP, editorScene);
+        if(loadTmp)
+        {
+            LevelLoader.loadFromFile("Levels/tmp", editorScene);
+        }
+        else {
+            LevelLoader.loadFromFile(sceneFP, editorScene);
+        }
         SceneManager.switchScene(editorScene);
         ResetCamera(editorCameraController.getCamera(), editorCameraController, true);
         playerRef = null;
@@ -48,11 +59,19 @@ public class EditorManager {
         setIsPlaying(false);
     }
 
-    public static void Play(){
+    public static void Play(boolean isTmp){
         setIsPlaying(true);
 
-        // Load the playable scene from the filepath
-        editorScene = LevelLoader.loadPlayableFromFile(sceneFP);
+        if(isTmp)
+        {
+            // Load the playable scene from the filepath
+            editorScene = LevelLoader.loadPlayableFromFile("Levels/tmp");
+        }
+        else {
+            // Load the playable scene from the filepath
+            editorScene = LevelLoader.loadPlayableFromFile(sceneFP);
+        }
+
 
         // Don't let the pointer add objects into the scene when we're playing!
         pointer.setActive(false);

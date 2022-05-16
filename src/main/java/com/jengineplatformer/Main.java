@@ -11,6 +11,8 @@ import com.jengineplatformer.LevelEditor.EditorManager;
 import com.jengineplatformer.LevelEditor.LevelSaver;
 import javafx.application.Application;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
@@ -28,7 +30,7 @@ public class Main extends Application {
         // create main menu text
         Text text = new Text("JEngine Platformer");
         text.setFill(Color.WHITE);
-        text.setFont(text.getFont().font(50));
+        text.setFont(Font.font("verdana", FontWeight.LIGHT, 30));
         text.setX(640 - text.getLayoutBounds().getWidth()/2);
         text.setY(360 - text.getLayoutBounds().getHeight()/2);
         mainMenu.addUI(text);
@@ -39,13 +41,16 @@ public class Main extends Application {
 
         stage.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, (event) -> {
             if (event.getCode() == javafx.scene.input.KeyCode.F1) {
-                EditorManager.LoadEditor();
+                EditorManager.ReloadEditScene(false);
             }
             if (event.getCode() == javafx.scene.input.KeyCode.F2) {
-                EditorManager.Play();
+                EditorManager.PlayTempScene();
             }
             if (event.getCode() == javafx.scene.input.KeyCode.F3) {
                 LevelSaver.SaveLevel(EditorManager.editorScene, EditorManager.sceneFP);
+            }
+            if (event.getCode() == javafx.scene.input.KeyCode.F4) {
+                EditorManager.ReloadEditScene(true);
             }
         });
     }

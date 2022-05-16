@@ -8,6 +8,7 @@ import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.MousePointer;
+import com.JEngine.Game.Visual.Scenes.SceneManager;
 
 public class EditorPointer extends MousePointer {
 
@@ -105,7 +106,7 @@ public class EditorPointer extends MousePointer {
         if(!getActive())
             return;
 
-        for (GameObject obj : EditorManager.editorScene.getObjects()) {
+        for (GameObject obj : SceneManager.getActiveScene().getObjects()) {
             if(obj == null)
                 continue;
             if(obj instanceof Sprite sprite)
@@ -122,7 +123,7 @@ public class EditorPointer extends MousePointer {
 
                 if(xPos < cursorXPos && cursorXPos < xPos2)
                 {
-                    if(yPos < cursorYPos && cursorYPos < yPos2)
+                    if(yPos < cursorYPos && cursorYPos < yPos2 && !obj.isQueuedForDeletion())
                     {
                         EditorManager.editorScene.remove(obj);
                         EditorManager.AddEditorAction(new EditorActionHistory(EditorAction.DELETE, obj));
