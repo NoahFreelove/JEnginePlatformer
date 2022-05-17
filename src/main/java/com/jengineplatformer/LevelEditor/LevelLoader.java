@@ -84,8 +84,9 @@ public class LevelLoader {
                     scene.add(w);
                     count++;
                     continue;
-                } else if (line.equalsIgnoreCase("boostpad")) {
-                    Boostpad bp = new Boostpad(pos, 64,32,"Boost-Pad");
+                }
+                else if (line.equalsIgnoreCase("boostpad")) {
+                    Boostpad bp = new Boostpad(pos, 32,128,"Boost-Pad");
                     scene.add(bp);
                     count++;
                     continue;
@@ -128,7 +129,7 @@ public class LevelLoader {
         Vector3 pos = new Vector3(0,0,0);
         Vector3 rot = new Vector3(0,0,0);
         Vector3 scale = new Vector3(0,0,0);
-
+        editorScene.setSceneName(loadedLines[0]);
         for (int i = 0; i < loadedLines.length; i++) {
 
             String line = loadedLines[i];

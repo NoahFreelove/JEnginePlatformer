@@ -13,7 +13,7 @@ public class ObjectDictionary {
             new GameImage(GenerateSolidTexture.generateImage(64,64,0xFF55FF45)),
             new GameImage(MissingTexture.getMissingTextureImage(64,64)),
             new GameImage(GenerateSolidTexture.generateImage(128,128,0xFFFF00FF)),
-            new GameImage(GenerateSolidTexture.generateImage(64,32, 0xFFFFFF00))
+            new GameImage(GenerateSolidTexture.generateImage(32,128, 0xFFFFFF00))
     };
 
     public static int nameToIntIndex(String objectName){

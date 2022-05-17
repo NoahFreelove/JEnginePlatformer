@@ -2,6 +2,7 @@ package com.jengineplatformer.Core;
 
 import com.JEngine.Components.Colliders.Collider_Comp;
 import com.JEngine.Core.GameObject;
+import com.JEngine.Core.Position.Direction;
 import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.jengineplatformer.Objects.Boostpad;
@@ -67,8 +68,8 @@ public class PlayerCollider extends Collider_Comp {
                 }
             }
             case "boostpad" -> {
-                player.getPhysicsBody().setOnGround(false);
-                player.getPhysicsBody().addVelocity(new Vector2(0,-15));
+                //player.Move(Direction.Up, 30);
+                ((Boostpad)other.getParent()).RequestBoost(player);
             }
         }
     }
