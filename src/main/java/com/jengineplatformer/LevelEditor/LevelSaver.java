@@ -41,5 +41,7 @@ public class LevelSaver {
             i+=13;
         }
         FileOperations.stringArrToFile(data, new File(filepath).getAbsolutePath());
+        FileOperations.stringArrToFile(data, new File("Levels/tmp").getAbsolutePath());
+
     }
 }

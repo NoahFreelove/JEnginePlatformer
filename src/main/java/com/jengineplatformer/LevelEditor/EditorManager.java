@@ -8,6 +8,10 @@ import com.JEngine.Game.Visual.SearchType;
 import com.JEngine.Utility.GameMath;
 import com.jengineplatformer.Core.PlatformPlayer;
 import com.jengineplatformer.Main;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
+import javafx.scene.text.Text;
 
 import java.io.File;
 
@@ -44,12 +48,15 @@ public class EditorManager {
 
     public static void ReloadEditScene(boolean loadTmp){
         editorScene = new GameScene(5, "EditorScene");
-        if(loadTmp)
+        if(sceneFP != null && !sceneFP.equals(""))
         {
-            LevelLoader.loadFromFile("Levels/tmp", editorScene);
-        }
-        else {
-            LevelLoader.loadFromFile(sceneFP, editorScene);
+            if(loadTmp)
+            {
+                LevelLoader.loadFromFile("Levels/tmp", editorScene);
+            }
+            else {
+                LevelLoader.loadFromFile(sceneFP, editorScene);
+            }
         }
         SceneManager.switchScene(editorScene);
         ResetCamera(editorCameraController.getCamera(), editorCameraController, true);
@@ -57,6 +64,24 @@ public class EditorManager {
         editorScene.add(pointer);
         pointer.setActive(true);
         setIsPlaying(false);
+
+        //Create help text at the top left of the screen
+        Text helpText = new Text("""
+                WASD - Movement
+                Left Click - Place Object (Drag for walls)
+                Right Click - Remove Object
+                Ctr+Z - Undo
+                Number Keys - Select Object
+                F1 - Load Editor
+                F2 - Play
+                F3 - Save
+                Escape - Quit Editor
+                """);
+        helpText.setFill(Color.WHITE);
+        helpText.setFont(Font.font("Verdana", FontWeight.LIGHT, 15));
+        helpText.setX(10);
+        helpText.setY(30);
+        editorScene.addUI(helpText);
     }
 
     public static void Play(boolean isTmp){

@@ -106,25 +106,6 @@ public class LevelLoader {
     public static void loadFromFile(String filePath, GameScene editorScene){
         String[] loadedLines = FileOperations.fileToStringArr(new File(filePath).getAbsolutePath());
 
-        //Create help text at the top left of the screen
-        Text helpText = new Text("""
-                WASD - Movement
-                Left Click - Place Object
-                Right Click - Remove Object
-                Ctr+Z - Undo
-                Number Keys - Select Object
-                F1 - Load Editor (load from tmp file)
-                F2 - Play (save to tmp file)
-                F3 - Save
-                F4 - Reload Editor
-                Escape - Quit Editor
-                """);
-        helpText.setFill(Color.WHITE);
-        helpText.setFont(Font.font("Verdana", FontWeight.LIGHT, 15));
-        helpText.setX(10);
-        helpText.setY(30);
-        editorScene.addUI(helpText);
-
         boolean inObject = false;
         Vector3 pos = new Vector3(0,0,0);
         Vector3 rot = new Vector3(0,0,0);

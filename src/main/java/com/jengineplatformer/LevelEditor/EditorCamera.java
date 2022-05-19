@@ -17,6 +17,7 @@ public class EditorCamera extends Player {
     public EditorCamera() {
         super(Transform.exSimpleTransform(0,0), null, new Identity("CameraController", "controller"));
         this.camera = new GameCamera(new Vector3(0,0,0), SceneManager.getWindow(), EditorManager.editorScene, this, new Identity("EditorCamera", "camera"));
+        SceneManager.setActiveCamera(camera);
     }
 
     @Override
