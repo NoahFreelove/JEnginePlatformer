@@ -23,7 +23,7 @@ public class EditorManager {
     public static PlatformPlayer playerRef = null;
     private static boolean hasInit;
     private static boolean isPlaying;
-
+    public static Text helpText;
     private static EditorActionHistory[] actionHistory = new EditorActionHistory[25];
     private static int actionIndex;
 
@@ -35,6 +35,7 @@ public class EditorManager {
         }
         //ReloadEditScene();
         ReloadEditScene(false);
+        LevelSaver.SaveLevel(editorScene, sceneFP);
     }
 
     public static void PlayTempScene(){
@@ -66,7 +67,7 @@ public class EditorManager {
         setIsPlaying(false);
 
         //Create help text at the top left of the screen
-        Text helpText = new Text("""
+        helpText = new Text("""
                 WASD - Movement
                 Left Click - Place Object (Drag for walls)
                 Right Click - Remove Object

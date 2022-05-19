@@ -3,6 +3,8 @@ package com.jengineplatformer.LevelEditor;
 import com.JEngine.Core.GameObject;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.IO.FileOperations;
+import javafx.scene.Node;
+import javafx.scene.text.Text;
 
 import java.io.File;
 
@@ -42,6 +44,5 @@ public class LevelSaver {
         }
         FileOperations.stringArrToFile(data, new File(filepath).getAbsolutePath());
         FileOperations.stringArrToFile(data, new File("Levels/tmp").getAbsolutePath());
-
     }
 }

@@ -43,6 +43,7 @@ public class Main extends Application {
                 EditorManager.ReloadEditScene(true);
             }
         });
+        EditorManager.LoadEditor();
     }
 
     public static void main(String[] args) {

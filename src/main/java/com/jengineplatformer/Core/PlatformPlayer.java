@@ -21,13 +21,14 @@ public class PlatformPlayer extends Player {
     private GameCamera camera;
     private float moveSpeed = 5f;
 
-    private Vector2 normalGravity = PhysicsBody_Comp.defaultGravity();
+    private Vector2 normalGravity = PhysicsBody_Comp.getGlobalGravity();
     private Vector2 strongGravity = new Vector2(0,100f);
     private boolean isStrongGravity;
 
+
     public PlatformPlayer(Vector3 position) {
         super(new Transform(position, Vector3.emptyVector(), Vector3.oneVector()), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("player")]), new Identity("Player","player"));
-        physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.defaultGravity());
+        physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.getGlobalGravity());
         addComponents(new PlayerCollider(new Vector3(0,0,0), 64, 64, false, this), physicsBody);
         this.camera = new GameCamera(getPosition(), SceneManager.getWindow(), SceneManager.getActiveScene(), this, new Identity("PlayerCamera","camera"));
         camera.setFocus(this);
@@ -36,15 +37,15 @@ public class PlatformPlayer extends Player {
 
     @Override
     public void Update(){
-        if(Input.Left)
+        if(Input.A_Pressed)
         {
             physicsBody.addVelocity(new Vector2(-moveSpeed,0));
         }
-        if(Input.Right)
+        if(Input.D_Pressed)
         {
             physicsBody.addVelocity(new Vector2(moveSpeed,0));
         }
-        if(Input.Up || Input.Space_Pressed)
+        if(Input.W_Pressed || Input.Space_Pressed)
         {
             jump();
         }
@@ -72,10 +73,14 @@ public class PlatformPlayer extends Player {
     @Override
     public void onKeyReleased(KeyCode keyCode)
     {
-        if(keyCode == KeyCode.S || keyCode == KeyCode.DOWN)
+
+        switch (keyCode)
         {
-            isStrongGravity = false;
-            physicsBody.setGravity(normalGravity);
+            case S ->{
+                isStrongGravity = false;
+                physicsBody.setGravity(normalGravity);
+            }
+
         }
     }
 
@@ -93,5 +98,11 @@ public class PlatformPlayer extends Player {
 
     public PhysicsBody_Comp getPhysicsBody() {
         return physicsBody;
+    }
+
+    public void setPlayerGravity(Vector2 newGravity)
+    {
+        this.normalGravity = newGravity;
+        this.physicsBody.setGravity(newGravity);
     }
 }

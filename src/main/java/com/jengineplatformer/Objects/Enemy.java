@@ -44,7 +44,7 @@ public class Enemy extends Pawn {
     public Enemy(Vector3 initPos, Vector3 initScale) {
         super(new Transform(initPos, Vector3.emptyVector(), initScale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("enemy")]), new Identity("Enemy", "enemy"));
         enemyCollider = new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this);
-        physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.defaultGravity());
+        physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.getGlobalGravity());
         patrol = new Pathfinding_Comp(patrolPoints[0]);
         patrol.setOnTargetReachedEvent(onPatrolSuccess);
         addComponents(enemyCollider, physicsBody, patrol);
@@ -52,7 +52,7 @@ public class Enemy extends Pawn {
     public Enemy(Transform transform, GameImage image, String name) {
         super(transform, image, new Identity("Enemy", name));
         enemyCollider = new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this);
-        physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.defaultGravity());
+        physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.getGlobalGravity());
         patrol = new Pathfinding_Comp(EditorManager.playerRef);
         patrol.setOnTargetReachedEvent(onPatrolSuccess);
 
