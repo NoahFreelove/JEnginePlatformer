@@ -12,10 +12,10 @@ import com.JEngine.Utility.Misc.GenericMethod;
 import com.jengineplatformer.LevelEditor.ObjectDictionary;
 
 public class Shooter extends Sprite {
-    private GameTimer gt;
+    private GameTimer gt = new GameTimer(3000, new GenericMethod[]{args -> shoot()});
     public Shooter(Vector3 position, Vector3 rotation) {
         super(new Transform(position, rotation, Vector3.oneVector()), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("shooter")]), new Identity("Shooter","shooter"));
-        addCollider(new BoxCollider_Comp(Vector3.emptyVector(), 64,64,false,this));
+        //addCollider(new BoxCollider_Comp(Vector3.emptyVector(), 64,64,true,this));
     }
     @Override
     public void OnAdded(){

@@ -17,7 +17,7 @@ public class ShooterProjectile extends Pawn {
     int life = 300;
     public ShooterProjectile(Vector3 position, Direction direction) {
         super(new Transform(position, Vector3.emptyVector(), Vector3.oneVector()), new GameImage(GenerateSolidTexture.generateImage(32, 32, 0xFFD00000)), new Identity("projectile", "shooterprojectile"));
-        addCollider(new BoxCollider_Comp(Vector3.emptyVector(), 32,32, true,this));
+        addCollider(new BoxCollider_Comp(Vector3.emptyVector(), 32,32, false,this));
         switch (direction)
         {
             case Up -> {
