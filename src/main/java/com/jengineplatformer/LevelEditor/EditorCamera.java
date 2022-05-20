@@ -49,12 +49,30 @@ public class EditorCamera extends Player {
     public void onKeyReleased(KeyCode key) {
         switch (key)
         {
-            case DIGIT1 -> EditorManager.pointer.setSelectedObject("wall");
-            case DIGIT2 -> EditorManager.pointer.setSelectedObject("spike");
-            case DIGIT3 -> EditorManager.pointer.setSelectedObject("enemy");
-            case DIGIT4 -> EditorManager.pointer.setSelectedObject("player");
-            case DIGIT5 -> EditorManager.pointer.setSelectedObject("breakablewall");
-            case DIGIT6 -> EditorManager.pointer.setSelectedObject("boostpad");
+            case DIGIT1 -> {
+                EditorManager.pointer.setSelectedObject("wall");
+                EditorManager.currentSelectedObjectText.setText("Selected: Wall");
+            }
+
+            case DIGIT2 -> {EditorManager.pointer.setSelectedObject("spike");
+                EditorManager.currentSelectedObjectText.setText("Selected: Spike");
+            }
+
+            case DIGIT3 -> {EditorManager.pointer.setSelectedObject("enemy");
+                EditorManager.currentSelectedObjectText.setText("Selected: Enemy");
+            }
+            case DIGIT4 -> {EditorManager.pointer.setSelectedObject("player");
+                EditorManager.currentSelectedObjectText.setText("Selected: Player");
+            }
+            case DIGIT5 -> {EditorManager.pointer.setSelectedObject("breakablewall");
+                EditorManager.currentSelectedObjectText.setText("Selected: Breakable Wall");
+            }
+            case DIGIT6 -> {EditorManager.pointer.setSelectedObject("boostpad");
+                EditorManager.currentSelectedObjectText.setText("Selected: Boostpad");
+            }
+            case DIGIT7 -> {EditorManager.pointer.setSelectedObject("shooter");
+                EditorManager.currentSelectedObjectText.setText("Selected: Shooter");
+            }
             case Z -> {
                 if (Input.Control_Pressed)
                 {

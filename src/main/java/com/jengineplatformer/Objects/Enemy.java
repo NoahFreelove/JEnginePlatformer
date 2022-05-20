@@ -22,10 +22,7 @@ public class Enemy extends Pawn {
 
     private int patrolIndex;
 
-    private GameObject[] patrolPoints = new GameObject[]{
-            new GameObject(new Vector2(700,535)),
-            new GameObject(new Vector2(1100,535))
-    };
+    private GameObject[] patrolPoints;
 
     private GenericMethod onPatrolSuccess = new GenericMethod() {
         @Override
@@ -44,6 +41,10 @@ public class Enemy extends Pawn {
     public Enemy(Vector3 initPos, Vector3 initScale) {
         super(new Transform(initPos, Vector3.emptyVector(), initScale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("enemy")]), new Identity("Enemy", "enemy"));
         enemyCollider = new BoxCollider_Comp(Vector3.emptyVector(), 64, 64, false, this);
+        patrolPoints = new GameObject[]{
+                new GameObject(new Vector2(getPosition().x-200, getPosition().y)),
+                new GameObject(new Vector2(getPosition().x +200,getPosition().y))
+        };
         physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.getGlobalGravity());
         patrol = new Pathfinding_Comp(patrolPoints[0]);
         patrol.setOnTargetReachedEvent(onPatrolSuccess);

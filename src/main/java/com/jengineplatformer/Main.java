@@ -30,8 +30,6 @@ public class Main extends Application {
 
         createMainMenu();
 
-        //EditorManager.LoadEditor();
-
         stage.addEventHandler(javafx.scene.input.KeyEvent.KEY_PRESSED, (event) -> {
             if (event.getCode() == javafx.scene.input.KeyCode.F2) {
                 EditorManager.PlayTempScene();

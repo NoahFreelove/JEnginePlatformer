@@ -9,6 +9,7 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.MousePointer;
 import com.JEngine.Game.Visual.Scenes.SceneManager;
+import com.JEngine.Utility.GameMath;
 
 public class EditorPointer extends MousePointer {
 
@@ -16,7 +17,7 @@ public class EditorPointer extends MousePointer {
     private Vector2 endClickPos = new Vector2(0,0);
     private String selectedObject = "wall";
     private boolean addedPlayer = false;
-
+    private float currRot = 0f;
     public EditorPointer() {
         super(null);
     }
@@ -83,7 +84,7 @@ public class EditorPointer extends MousePointer {
 
         if(ObjectDictionary.nameToCanBeStretched(selectedObject))
         {
-            newObject = new Sprite(new Transform(new Vector3(objectPlacePosition, 2), Vector3.emptyVector(), new Vector3(scaleX,scaleY,1)),
+            newObject = new Sprite(new Transform(new Vector3(objectPlacePosition, 2), new Vector3(currRot,0,0), new Vector3(scaleX,scaleY,1)),
                     ObjectDictionary.objectImages[index],
                     new Identity("levelEditorObject", selectedObject));
             EditorManager.editorScene.add(newObject);
@@ -95,7 +96,7 @@ public class EditorPointer extends MousePointer {
             endClickPos.x -= image.getWidth()/2f;
             endClickPos.y -= image.getHeight()/2f;
 
-            newObject = new Sprite(new Transform(new Vector3(endClickPos, 2), Vector3.emptyVector(), Vector3.oneVector()),
+            newObject = new Sprite(new Transform(new Vector3(endClickPos, 2), new Vector3(currRot,0,0), Vector3.oneVector()),
                     image, new Identity("levelEditorObject", selectedObject));
             EditorManager.editorScene.add(newObject);
         }
@@ -137,11 +138,35 @@ public class EditorPointer extends MousePointer {
 
     }
 
+    @Override
+    public void onScroll(double scroll) {
+        int scrollClamp = (int) GameMath.clamp(-1, 1, (float) scroll);
+        if (scrollClamp < 0)
+        {
+            currRot-=90;
+            // if over 360, set to 0
+            if(currRot < 0)
+                currRot += 360;
+        }
+        else if (scrollClamp > 0)
+        {
+            currRot+=90;
+            // if over 360, set to 0
+            if(currRot > 360)
+                currRot -= 360;
+        }
+        System.out.println(currRot);
+    }
+
     public void setAddedPlayer(boolean addedPlayer) {
         this.addedPlayer = addedPlayer;
     }
 
     public void setSelectedObject(String selectedObject) {
         this.selectedObject = selectedObject;
+    }
+
+    public String getSelectedObject() {
+        return selectedObject.substring(0, 1).toUpperCase() + selectedObject.substring(1);
     }
 }

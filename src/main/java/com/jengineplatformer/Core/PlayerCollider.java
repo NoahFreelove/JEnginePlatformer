@@ -8,6 +8,7 @@ import com.JEngine.Core.Position.Vector3;
 import com.jengineplatformer.Objects.Boostpad;
 import com.jengineplatformer.Objects.BreakableWall;
 import com.jengineplatformer.Objects.Enemy;
+import com.jengineplatformer.Objects.Shooter;
 
 public class PlayerCollider extends Collider_Comp {
     PlatformPlayer player;
@@ -70,6 +71,12 @@ public class PlayerCollider extends Collider_Comp {
             case "boostpad" -> {
                 //player.Move(Direction.Up, 30);
                 ((Boostpad)other.getParent()).RequestBoost(player);
+            }
+            case "shooterprojectile" -> player.die();
+            case "shooter" -> {
+                if (player.isStrongGravity() && !player.getPhysicsBody().isOnGround()) {
+                    ((Shooter) other.getParent()).Die();
+                }
             }
         }
     }

@@ -7,12 +7,8 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.PlayersAndPawns.Sprite;
 import com.JEngine.Game.Visual.Scenes.GameScene;
 import com.JEngine.Utility.IO.FileOperations;
-import com.jengineplatformer.Core.*;
+import com.jengineplatformer.Core.PlatformPlayer;
 import com.jengineplatformer.Objects.*;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 
 import java.io.File;
 
@@ -91,6 +87,12 @@ public class LevelLoader {
                     count++;
                     continue;
                 }
+                else if (line.equalsIgnoreCase("shooter")){
+                    Shooter shooter = new Shooter(pos, rot);
+                    scene.add(shooter);
+                    count++;
+                    continue;
+                }
             }
             if(line.equalsIgnoreCase("START GAMEOBJECT"))
             {
@@ -153,6 +155,12 @@ public class LevelLoader {
                 else if(line.equalsIgnoreCase("boostpad"))
                 {
                     Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("boostpad")]), new Identity("Boost-Pad", "boostpad"));
+                    editorScene.add(sprite);
+                    continue;
+                }
+                else if(line.equalsIgnoreCase("shooter"))
+                {
+                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("shooter")]), new Identity("Shooter", "shooter"));
                     editorScene.add(sprite);
                     continue;
                 }

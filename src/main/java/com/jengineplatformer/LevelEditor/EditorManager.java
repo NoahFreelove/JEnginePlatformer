@@ -19,11 +19,12 @@ public class EditorManager {
     public static GameScene editorScene = new GameScene(5, "EditorScene");
     public static EditorCamera editorCameraController = new EditorCamera();
     public static EditorPointer pointer = new EditorPointer();
-    public static String sceneFP = new File("Levels/level2").getAbsolutePath();
+    public static String sceneFP = new File("Levels/level").getAbsolutePath();
     public static PlatformPlayer playerRef = null;
     private static boolean hasInit;
     private static boolean isPlaying;
     public static Text helpText;
+    public static Text currentSelectedObjectText;
     private static EditorActionHistory[] actionHistory = new EditorActionHistory[25];
     private static int actionIndex;
 
@@ -66,6 +67,12 @@ public class EditorManager {
         pointer.setActive(true);
         setIsPlaying(false);
 
+        currentSelectedObjectText = new Text("Selected: " + pointer.getSelectedObject());
+        currentSelectedObjectText.setFill(Color.RED);
+        currentSelectedObjectText.setFont(Font.font("Verdana", FontWeight.LIGHT, 15));
+        currentSelectedObjectText.setX(10);
+        currentSelectedObjectText.setY(300);
+        editorScene.addUI(currentSelectedObjectText);
         //Create help text at the top left of the screen
         helpText = new Text("""
                 WASD - Movement
@@ -103,7 +110,7 @@ public class EditorManager {
         pointer.setActive(false);
 
         // We need to search for the player instance, so we can focus the camera around them
-        PlatformPlayer player = null;
+        PlatformPlayer player;
         GameCamera playerCamera = null;
         for (GameObject o: EditorManager.editorScene.findObjectsByIdentity("Player", "player", SearchType.SearchByNameAndTag) ) {
             if(o !=null)

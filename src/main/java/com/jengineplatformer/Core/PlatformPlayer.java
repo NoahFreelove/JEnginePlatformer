@@ -64,9 +64,12 @@ public class PlatformPlayer extends Player {
     {
         if(keyCode == KeyCode.S || keyCode == KeyCode.DOWN)
         {
-            isStrongGravity = true;
-            physicsBody.setGravity(strongGravity);
-            physicsBody.addVelocity(new Vector2(0,10));
+            if(!physicsBody.isOnGround())
+            {
+                isStrongGravity = true;
+                physicsBody.setGravity(strongGravity);
+                physicsBody.addVelocity(new Vector2(0,10));
+            }
         }
     }
 
