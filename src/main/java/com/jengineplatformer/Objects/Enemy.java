@@ -48,7 +48,8 @@ public class Enemy extends Pawn {
         physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.getGlobalGravity());
         patrol = new Pathfinding_Comp(patrolPoints[0]);
         patrol.setOnTargetReachedEvent(onPatrolSuccess);
-        addComponents(enemyCollider, physicsBody, patrol);
+        addComponents(physicsBody, patrol);
+        addCollider(enemyCollider);
     }
     public Enemy(Transform transform, GameImage image, String name) {
         super(transform, image, new Identity("Enemy", name));

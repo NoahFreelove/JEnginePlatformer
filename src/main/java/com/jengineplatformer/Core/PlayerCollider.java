@@ -2,8 +2,6 @@ package com.jengineplatformer.Core;
 
 import com.JEngine.Components.Colliders.Collider_Comp;
 import com.JEngine.Core.GameObject;
-import com.JEngine.Core.Position.Direction;
-import com.JEngine.Core.Position.Vector2;
 import com.JEngine.Core.Position.Vector3;
 import com.jengineplatformer.Objects.Boostpad;
 import com.jengineplatformer.Objects.BreakableWall;
@@ -12,9 +10,8 @@ import com.jengineplatformer.Objects.Shooter;
 
 public class PlayerCollider extends Collider_Comp {
     PlatformPlayer player;
-    boolean boostpadFrameDelay;
     public PlayerCollider(Vector3 initialOffset, float width, float height, boolean isTrigger, GameObject parent) {
-        super(initialOffset, width, height, isTrigger, parent);
+        super(initialOffset, width, height, false, parent);
         player = (PlatformPlayer) parent;
     }
 
@@ -44,10 +41,9 @@ public class PlayerCollider extends Collider_Comp {
      */
     @Override
     public boolean canMove(float xDisplacement, float yDisplacement) {
-        PlayerCollider tmpCollider = new PlayerCollider(getPosition(), getWidth(), getHeight(), isTrigger(), getParent());
-
+        PlayerCollider tmpCollider = new PlayerCollider(getPosition(), getWidth(), getHeight(), false, getParent());
         tmpCollider.setPosition(new Vector3(getPosition().x + xDisplacement, getPosition().y + yDisplacement, getPosition().z));
-        return !tmpCollider.isCollidingWithAny(isTrigger());
+        return !tmpCollider.isCollidingWithHard();
     }
 
     @Override

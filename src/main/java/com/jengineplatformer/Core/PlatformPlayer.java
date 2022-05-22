@@ -29,7 +29,8 @@ public class PlatformPlayer extends Player {
     public PlatformPlayer(Vector3 position) {
         super(new Transform(position, Vector3.emptyVector(), Vector3.oneVector()), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("player")]), new Identity("Player","player"));
         physicsBody = new PhysicsBody_Comp(true, PhysicsBody_Comp.getGlobalGravity());
-        addComponents(new PlayerCollider(new Vector3(0,0,0), 64, 64, false, this), physicsBody);
+        addComponents(physicsBody);
+        addCollider(new PlayerCollider(new Vector3(0,0,0), 64, 64, false, this));
         this.camera = new GameCamera(getPosition(), SceneManager.getWindow(), SceneManager.getActiveScene(), this, new Identity("PlayerCamera","camera"));
         camera.setFocus(this);
         camera.setFocusOffset(new Vector2(0,-100));

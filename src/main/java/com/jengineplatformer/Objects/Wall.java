@@ -12,7 +12,7 @@ public class Wall extends Sprite {
     public Wall(Vector3 pos, Vector3 scale, GameImage newSprite, String name) {
         super(new Transform(pos, new Vector3(0,0,0), scale), newSprite, new Identity(name,"wall"));
         collider = new BoxCollider_Comp(new Vector3(0,0,0), getSprite().getWidth()*scale.x, getSprite().getHeight()*scale.y, false, this);
-        addComponent(collider);
+        addCollider(collider);
     }
 
     public BoxCollider_Comp getCollider() {

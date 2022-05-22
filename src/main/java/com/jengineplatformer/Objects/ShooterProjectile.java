@@ -15,9 +15,11 @@ public class ShooterProjectile extends Pawn {
     public Vector2 moveDir = new Vector2(0,0);
     float moveSpeed = 5;
     int life = 300;
+    BoxCollider_Comp collider;
     public ShooterProjectile(Vector3 position, Direction direction) {
         super(new Transform(position, Vector3.emptyVector(), Vector3.oneVector()), new GameImage(GenerateSolidTexture.generateImage(32, 32, 0xFFD00000)), new Identity("projectile", "shooterprojectile"));
-        addCollider(new BoxCollider_Comp(Vector3.emptyVector(), 32,32, false,this));
+        collider = new BoxCollider_Comp(Vector3.emptyVector(), 32,32, false,this, "shooter");
+        addCollider(collider);
         switch (direction)
         {
             case Up -> {
@@ -37,6 +39,7 @@ public class ShooterProjectile extends Pawn {
 
     @Override
     public void Update(){
+        collider.setPosition(getPosition());
         super.Update();
         life--;
         if(life <= 0)

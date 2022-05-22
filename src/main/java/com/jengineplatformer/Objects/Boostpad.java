@@ -31,6 +31,7 @@ public class Boostpad extends Sprite {
             ableToBoost = false;
             GameUtility.waitForSeconds(0.2, args -> ableToBoost = true, null);
             boostObject(player.getPhysicsBody());
+
         }
     }
 
