@@ -9,22 +9,16 @@ import com.JEngine.Utility.About.GameInfo;
 import com.jengineplatformer.LevelEditor.EditorManager;
 import com.jengineplatformer.LevelEditor.LevelSaver;
 import javafx.application.Application;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
 import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
-import javafx.scene.text.FontWeight;
-import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
-import java.io.*;
-
-import static java.util.Arrays.binarySearch;
+import java.io.IOException;
 
 public class Main extends Application {
     public static GameScene mainMenu;
     public static GameCamera mainCamera;
     private static GameWindow window;
+
     @Override
     public void start(Stage stage) throws IOException {
         setupEngineInfo();

@@ -132,6 +132,8 @@ public class EditorManager {
 
         // After everything is ready, reset the camera's position and show the scene
         SceneManager.switchScene(editorScene);
+        editorScene.addUI(PlatformPlayer.scoreText);
+
         ResetCamera(playerCamera, null, false);
 
     }

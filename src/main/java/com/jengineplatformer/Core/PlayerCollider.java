@@ -51,10 +51,11 @@ public class PlayerCollider extends Collider_Comp {
         if(player == null)
             return;
         switch (other.getParent().getIdentity().getTag()) {
-            case "spike" -> player.die();
+            case "spike", "shooterprojectile" -> player.die();
             case "enemy" -> {
                 if (player.isStrongGravity() && !player.getPhysicsBody().isOnGround()) {
                     ((Enemy) other.getParent()).die();
+                    player.addScore(100);
                 } else {
                     player.die();
                 }
@@ -62,16 +63,17 @@ public class PlayerCollider extends Collider_Comp {
             case "breakablewall" ->{
                 if (player.isStrongGravity() && !player.getPhysicsBody().isOnGround()) {
                     ((BreakableWall) other.getParent()).DestroyWall();
+                    player.addScore(50);
                 }
             }
             case "boostpad" -> {
                 //player.Move(Direction.Up, 30);
                 ((Boostpad)other.getParent()).RequestBoost(player);
             }
-            case "shooterprojectile" -> player.die();
             case "shooter" -> {
                 if (player.isStrongGravity() && !player.getPhysicsBody().isOnGround()) {
                     ((Shooter) other.getParent()).Die();
+                    player.addScore(100);
                 }
             }
         }

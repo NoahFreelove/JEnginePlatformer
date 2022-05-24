@@ -14,6 +14,8 @@ import com.JEngine.Utility.Input;
 import com.jengineplatformer.LevelEditor.EditorManager;
 import com.jengineplatformer.LevelEditor.ObjectDictionary;
 import javafx.scene.input.KeyCode;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 
 public class PlatformPlayer extends Player {
     private PhysicsBody_Comp physicsBody;
@@ -24,7 +26,9 @@ public class PlatformPlayer extends Player {
     private Vector2 normalGravity = PhysicsBody_Comp.getGlobalGravity();
     private Vector2 strongGravity = new Vector2(0,100f);
     private boolean isStrongGravity;
-
+    private long score;
+    public static Text scoreText = new Text();
+    public static PlatformPlayer instance;
 
     public PlatformPlayer(Vector3 position) {
         super(new Transform(position, Vector3.emptyVector(), Vector3.oneVector()), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("player")]), new Identity("Player","player"));
@@ -34,22 +38,32 @@ public class PlatformPlayer extends Player {
         this.camera = new GameCamera(getPosition(), SceneManager.getWindow(), SceneManager.getActiveScene(), this, new Identity("PlayerCamera","camera"));
         camera.setFocus(this);
         camera.setFocusOffset(new Vector2(0,-100));
+        scoreText = new Text("Score: " + score);
+        scoreText.setTranslateX(100);
+        scoreText.setTranslateY(50);
+
+        scoreText.setScaleX(2);
+        scoreText.setScaleY(2);
+        scoreText.setFill(Color.LIGHTGREEN);
+
+        PlatformPlayer.instance = this;
     }
 
     @Override
     public void Update(){
-        if(Input.A_Pressed)
+        if(Input.Left)
         {
             physicsBody.addVelocity(new Vector2(-moveSpeed,0));
         }
-        if(Input.D_Pressed)
+        if(Input.Right)
         {
             physicsBody.addVelocity(new Vector2(moveSpeed,0));
         }
-        if(Input.W_Pressed || Input.Space_Pressed)
+        if(Input.Up || Input.Space_Pressed)
         {
             jump();
         }
+        scoreText.setText("Score: " + score);
         super.Update();
     }
 
@@ -108,5 +122,10 @@ public class PlatformPlayer extends Player {
     {
         this.normalGravity = newGravity;
         this.physicsBody.setGravity(newGravity);
+    }
+
+    public void addScore(int score)
+    {
+        this.score += score;
     }
 }

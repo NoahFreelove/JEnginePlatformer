@@ -159,7 +159,7 @@ public class EditorPointer extends MousePointer {
         {
             currRot = 0;
         }
-        EditorManager.rotationText.setText("Rotation: " + currRot + "°");
+        EditorManager.rotationText.setText("Rotation: " + (int)currRot + "°");
     }
 
     public void setAddedPlayer(boolean addedPlayer) {
