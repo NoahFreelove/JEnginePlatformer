@@ -25,6 +25,12 @@ public class Boostpad extends Sprite {
         this.boostDirection = boostDirection;
     }
 
+    public Boostpad(Vector3 position, Vector3 rot, int width, int height, String name, Vector2 boostDirection) {
+        super(new Transform(position, rot, Vector3.oneVector()), new GameImage(GenerateSolidTexture.generateImage(width,height, 0xFFFFFF00)), new Identity(name, "boostpad"));
+        addComponent(new BoxCollider_Comp(Vector3.emptyVector(), width,height, false, this));
+        this.boostDirection = boostDirection;
+    }
+
     public void RequestBoost(PlatformPlayer player) {
 
         if(ableToBoost) {

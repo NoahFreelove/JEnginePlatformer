@@ -12,26 +12,19 @@ import com.JEngine.Utility.Misc.GenericMethod;
 import com.jengineplatformer.LevelEditor.ObjectDictionary;
 
 public class Shooter extends Sprite {
-    private GameTimer gt = new GameTimer(4000, new GenericMethod[]{args -> shoot()});
+    private int shootDelay = 120;
+    private int timeRemaining;
     public Shooter(Vector3 position, Vector3 rotation) {
         super(new Transform(position, rotation, Vector3.oneVector()), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("shooter")]), new Identity("Shooter","shooter"));
         addCollider(new BoxCollider_Comp(Vector3.emptyVector(), 64,64,false,this, "shooterprojectile"));
+        timeRemaining = shootDelay;
     }
-    @Override
-    public void OnAdded(){
-        gt = new GameTimer(3000, new GenericMethod[]{args -> shoot()});
-        gt.start();
-    }
+
 
     private void shoot(){
         ShooterProjectile proj = new ShooterProjectile(getPosition(), DirectionAngleConversion.vecToDir(new Vector2(getTransform().getRotation())));
         //proj.setPosition(getPosition().add(proj.moveDir.multiply(-64)));
         SceneManager.getActiveScene().add(proj);
-        System.out.println("shooting");
-    }
-    @Override
-    public void OnUnload(){
-        gt.stop();
     }
 
     public void Die(){
@@ -40,12 +33,17 @@ public class Shooter extends Sprite {
         {
             c.setActive(false);
         }
-        gt.stop();
         SceneManager.getActiveScene().remove(this);
     }
     @Override
     public void Update()
     {
         super.Update();
+        timeRemaining--;
+        if(timeRemaining<=0)
+        {
+            shoot();
+            timeRemaining = shootDelay;
+        }
     }
 }

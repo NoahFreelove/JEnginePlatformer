@@ -13,7 +13,8 @@ import javafx.scene.input.KeyCode;
 public class EditorCamera extends Player {
     private final GameCamera camera;
     private float moveSpeed = 10;
-
+    private float normalSpeed = 10;
+    private float sprintSpeed = 20;
     public EditorCamera() {
         super(Transform.exSimpleTransform(0,0), null, new Identity("CameraController", "controller"));
         this.camera = new GameCamera(new Vector3(0,0,0), SceneManager.getWindow(), EditorManager.editorScene, this, new Identity("EditorCamera", "camera"));
@@ -42,6 +43,14 @@ public class EditorCamera extends Player {
         if(Input.Escape_Pressed)
         {
             EditorManager.QuitEditor();
+        }
+        if(Input.Shift_Pressed)
+        {
+            moveSpeed = sprintSpeed;
+        }
+        else
+        {
+            moveSpeed = normalSpeed;
         }
     }
 

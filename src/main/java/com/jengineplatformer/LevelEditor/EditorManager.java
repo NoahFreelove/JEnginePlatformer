@@ -25,6 +25,7 @@ public class EditorManager {
     private static boolean isPlaying;
     public static Text helpText;
     public static Text currentSelectedObjectText;
+    public static Text rotationText;
     private static EditorActionHistory[] actionHistory = new EditorActionHistory[25];
     private static int actionIndex;
 
@@ -67,12 +68,6 @@ public class EditorManager {
         pointer.setActive(true);
         setIsPlaying(false);
 
-        currentSelectedObjectText = new Text("Selected: " + pointer.getSelectedObject());
-        currentSelectedObjectText.setFill(Color.RED);
-        currentSelectedObjectText.setFont(Font.font("Verdana", FontWeight.LIGHT, 15));
-        currentSelectedObjectText.setX(10);
-        currentSelectedObjectText.setY(300);
-        editorScene.addUI(currentSelectedObjectText);
         //Create help text at the top left of the screen
         helpText = new Text("""
                 WASD - Movement
@@ -80,6 +75,7 @@ public class EditorManager {
                 Right Click - Remove Object
                 Ctr+Z - Undo
                 Number Keys - Select Object
+                Scroll Wheel - Rotate
                 F1 - Load Editor
                 F2 - Play
                 F3 - Save
@@ -90,6 +86,20 @@ public class EditorManager {
         helpText.setX(10);
         helpText.setY(30);
         editorScene.addUI(helpText);
+
+        currentSelectedObjectText = new Text("Selected: " + pointer.getSelectedObject());
+        currentSelectedObjectText.setFill(Color.RED);
+        currentSelectedObjectText.setFont(Font.font("Verdana", FontWeight.LIGHT, 15));
+        currentSelectedObjectText.setX(10);
+        currentSelectedObjectText.setY(250);
+        editorScene.addUI(currentSelectedObjectText);
+
+        rotationText = new Text("Rotation: 0°");
+        rotationText.setFill(Color.WHITE);
+        rotationText.setFont(Font.font("Verdana", FontWeight.LIGHT, 15));
+        rotationText.setX(10);
+        rotationText.setY(280);
+        editorScene.addUI(rotationText);
     }
 
     public static void Play(boolean isTmp){

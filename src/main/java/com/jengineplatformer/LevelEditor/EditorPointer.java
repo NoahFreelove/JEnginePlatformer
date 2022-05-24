@@ -155,7 +155,11 @@ public class EditorPointer extends MousePointer {
             if(currRot > 360)
                 currRot -= 360;
         }
-        System.out.println(currRot);
+        if(currRot == 360)
+        {
+            currRot = 0;
+        }
+        EditorManager.rotationText.setText("Rotation: " + currRot + "°");
     }
 
     public void setAddedPlayer(boolean addedPlayer) {

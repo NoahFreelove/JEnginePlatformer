@@ -1,6 +1,8 @@
 package com.jengineplatformer.Objects;
 
 import com.JEngine.Components.Colliders.BoxCollider_Comp;
+import com.JEngine.Components.Colliders.Collider_Comp;
+import com.JEngine.Core.Component;
 import com.JEngine.Core.GameImage;
 import com.JEngine.Core.Identity;
 import com.JEngine.Core.Position.Direction;
@@ -46,6 +48,14 @@ public class ShooterProjectile extends Pawn {
         {
             setActive(false);
             SceneManager.getActiveScene().remove(this);
+            for (Component comp :
+                    getComponents()) {
+                if(comp instanceof Collider_Comp)
+                {
+                    comp.setActive(false);
+                    removeComponent(comp);
+                }
+            }
             return;
         }
         Move(moveDir, moveSpeed);

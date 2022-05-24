@@ -126,12 +126,12 @@ public class LevelLoader {
                     continue;
                 }
                 else if (line.equalsIgnoreCase("wall")){
-                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("wall")]), new Identity("Wall", "wall"));
+                    Sprite sprite = new Sprite(new Transform(pos, Vector3.emptyVector(), scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("wall")]), new Identity("Wall", "wall"));
                     editorScene.add(sprite);
                     continue;
                 }
                 else if (line.equalsIgnoreCase("player")){
-                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("player")]), new Identity("Player", "player"));
+                    Sprite sprite = new Sprite(new Transform(pos, Vector3.emptyVector(), scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("player")]), new Identity("Player", "player"));
                     editorScene.add(sprite);
                     continue;
                 }
@@ -142,19 +142,19 @@ public class LevelLoader {
                 }
                 else if(line.equalsIgnoreCase("enemy"))
                 {
-                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("enemy")]), new Identity("Enemy", "enemy"));
+                    Sprite sprite = new Sprite(new Transform(pos, Vector3.emptyVector(), scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("enemy")]), new Identity("Enemy", "enemy"));
                     editorScene.add(sprite);
                     continue;
                 }
                 else if(line.equalsIgnoreCase("breakablewall"))
                 {
-                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("breakablewall")]), new Identity("Breakablewall", "breakablewall"));
+                    Sprite sprite = new Sprite(new Transform(pos, Vector3.emptyVector(), scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("breakablewall")]), new Identity("Breakablewall", "breakablewall"));
                     editorScene.add(sprite);
                     continue;
                 }
                 else if(line.equalsIgnoreCase("boostpad"))
                 {
-                    Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("boostpad")]), new Identity("Boost-Pad", "boostpad"));
+                    Sprite sprite = new Sprite(new Transform(pos, Vector3.emptyVector(), scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("boostpad")]), new Identity("Boost-Pad", "boostpad"));
                     editorScene.add(sprite);
                     continue;
                 }
