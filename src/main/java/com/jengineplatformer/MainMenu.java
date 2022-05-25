@@ -31,14 +31,14 @@ public class MainMenu extends GameScene {
         addUI(errText);
 
         // create main menu text
-        Text text = new Text(GameInfo.appName);
+        Text text = new Text(GameInfo.getAppName());
         text.setFill(Color.WHITE);
         text.setFont(Font.font("verdana", FontWeight.LIGHT, 30));
         text.setX(640 - text.getLayoutBounds().getWidth()/2);
         text.setY(200 - text.getLayoutBounds().getHeight()/2);
         addUI(text);
 
-        Text authorText = new Text("Created by: " + GameInfo.authors[0]);
+        Text authorText = new Text("Created by: " + GameInfo.getAuthors()[0]);
         authorText.setFill(Color.WHITE);
         authorText.setFont(Font.font("verdana", FontWeight.LIGHT, 15));
         authorText.setX(640 - authorText.getLayoutBounds().getWidth()/2);

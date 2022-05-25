@@ -48,9 +48,9 @@ public class Main extends Application {
     }
 
     static void setupEngineInfo(){
-        GameInfo.authors = new String[]{"Noah Freelove"};
-        GameInfo.appName = "JEngine Platformer";
-        GameInfo.appVersionMajor = 1;
-        GameInfo.appVersionMinor = 0.1f;
+        GameInfo.setAuthors(new String[]{"Noah Freelove"});
+        GameInfo.setAppName("JEngine Platformer");
+        GameInfo.setAppVersionMajor(0);
+        GameInfo.setAppVersionMinor(1);
     }
 }
