@@ -18,8 +18,9 @@ public class SelectRectangle extends Sprite {
 
 
     public void startClick(){
-        setScale(new Vector3(0.5f,0.5f,0.5f));
+        setScale(new Vector3(0.1f,0.1f,0.1f));
         this.startPos = EditorManager.pointer.pointerPosToWorldPoint();
+        setPosition(new Vector3(startPos));
         setActive(true);
     }
 
@@ -35,6 +36,11 @@ public class SelectRectangle extends Sprite {
         Vector2 objectPlacePosition = new Vector2(startPos.x, startPos.y);
         float scaleX;
         float scaleY;
+
+        if(Math.abs(clickDelta.x)< 5)
+            return;
+        if(Math.abs(clickDelta.y)< 5)
+            return;
 
         // scale object based on cursor start and end positions
         if(clickDelta.x > 0){
