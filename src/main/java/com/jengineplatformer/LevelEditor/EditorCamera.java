@@ -82,6 +82,12 @@ public class EditorCamera extends Player {
             case DIGIT7 -> {EditorManager.pointer.setSelectedObject("shooter");
                 EditorManager.currentSelectedObjectText.setText("Selected: Shooter");
             }
+            case DIGIT8 -> {EditorManager.pointer.setSelectedObject("coin");
+                EditorManager.currentSelectedObjectText.setText("Selected: Gold Coin");
+            }
+            case DIGIT9 -> {EditorManager.pointer.setSelectedObject("wintile");
+                EditorManager.currentSelectedObjectText.setText("Selected: Win Tile");
+            }
             case Z -> {
                 if (Input.Control_Pressed)
                 {

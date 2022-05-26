@@ -3,10 +3,7 @@ package com.jengineplatformer.Core;
 import com.JEngine.Components.Colliders.Collider_Comp;
 import com.JEngine.Core.GameObject;
 import com.JEngine.Core.Position.Vector3;
-import com.jengineplatformer.Objects.Boostpad;
-import com.jengineplatformer.Objects.BreakableWall;
-import com.jengineplatformer.Objects.Enemy;
-import com.jengineplatformer.Objects.Shooter;
+import com.jengineplatformer.Objects.*;
 
 public class PlayerCollider extends Collider_Comp {
     PlatformPlayer player;
@@ -76,6 +73,11 @@ public class PlayerCollider extends Collider_Comp {
                     player.addScore(100);
                 }
             }
+            case "coin" -> {
+                ((GoldCoin)other.getParent()).collect();
+                player.addScore(200);
+            }
+            case "wintile" -> player.win();
         }
     }
 }

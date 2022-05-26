@@ -93,6 +93,18 @@ public class LevelLoader {
                     count++;
                     continue;
                 }
+                else if (line.equalsIgnoreCase("coin")){
+                    GoldCoin coin = new GoldCoin(pos);
+                    scene.add(coin);
+                    count++;
+                    continue;
+                }
+                else if (line.equalsIgnoreCase("wintile")){
+                    WinTile winTile = new WinTile(pos);
+                    scene.add(winTile);
+                    count++;
+                    continue;
+                }
             }
             if(line.equalsIgnoreCase("START GAMEOBJECT"))
             {
@@ -161,6 +173,15 @@ public class LevelLoader {
                 else if(line.equalsIgnoreCase("shooter"))
                 {
                     Sprite sprite = new Sprite(new Transform(pos, rot, scale), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("shooter")]), new Identity("Shooter", "shooter"));
+                    editorScene.add(sprite);
+                    continue;
+                } else if (line.equalsIgnoreCase("wintile")) {
+                    Sprite sprite = new Sprite(new Transform(pos, Vector3.emptyVector(), Vector3.oneVector()), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("wintile")]), new Identity("Win Tile", "wintile"));
+                    editorScene.add(sprite);
+                    continue;
+                }
+                else if (line.equalsIgnoreCase("coin")) {
+                    Sprite sprite = new Sprite(new Transform(pos, Vector3.emptyVector(), Vector3.oneVector()), new GameImage(ObjectDictionary.objectImages[ObjectDictionary.nameToIntIndex("coin")]), new Identity("Gold Coin", "coin"));
                     editorScene.add(sprite);
                     continue;
                 }

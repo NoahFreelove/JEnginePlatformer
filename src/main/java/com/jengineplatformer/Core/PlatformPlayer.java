@@ -13,6 +13,7 @@ import com.JEngine.Utility.ImageProcessing.GenerateSolidTexture;
 import com.JEngine.Utility.Input;
 import com.jengineplatformer.LevelEditor.EditorManager;
 import com.jengineplatformer.LevelEditor.ObjectDictionary;
+import com.jengineplatformer.LevelEditor.WinScreen;
 import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
@@ -127,5 +128,9 @@ public class PlatformPlayer extends Player {
     public void addScore(int score)
     {
         this.score += score;
+    }
+
+    public void win(){
+        SceneManager.switchScene(new WinScreen(score));
     }
 }

@@ -15,7 +15,8 @@ public class ObjectDictionary {
             new GameImage(GenerateSolidTexture.generateImage(128,128,0xFFFF00FF)),
             new GameImage(GenerateSolidTexture.generateImage(32,128, 0xFFFFFF00)),
             new GameImage(GenerateSolidTexture.generateImage(64,64,0xFFFF0000)),
-
+            new GameImage("images/wintile.png"),
+            new GameImage("images/coin.png"),
     };
 
     public static int nameToIntIndex(String objectName){
@@ -27,6 +28,8 @@ public class ObjectDictionary {
             case "breakablewall" -> 4;
             case "boostpad" -> 5;
             case "shooter" -> 6;
+            case "wintile" -> 7;
+            case "coin" -> 8;
             default -> -1;
         };
     }
