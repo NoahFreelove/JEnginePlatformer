@@ -27,6 +27,7 @@ public class EditorManager {
     public static Text currentSelectedObjectText;
     public static Text rotationText;
     private static EditorActionHistory[] actionHistory = new EditorActionHistory[25];
+    public static SelectRectangle selectRectangle = new SelectRectangle();
     private static int actionIndex;
 
     public static void LoadEditor() {
@@ -65,6 +66,8 @@ public class EditorManager {
         ResetCamera(editorCameraController.getCamera(), editorCameraController, true);
         playerRef = null;
         editorScene.add(pointer);
+        editorScene.add(selectRectangle);
+
         pointer.setActive(true);
         setIsPlaying(false);
 

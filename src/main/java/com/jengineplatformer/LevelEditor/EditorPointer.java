@@ -28,6 +28,8 @@ public class EditorPointer extends MousePointer {
         if(isLeftMouse)
         {
             placeObject();
+            EditorManager.selectRectangle.endClick();
+
         }
         else {
             deleteObject();
@@ -35,8 +37,12 @@ public class EditorPointer extends MousePointer {
     }
 
     @Override
-    protected void onMousePressed(boolean leftClick){
-        startClickPos = pointerPosToWorldPoint();
+    protected void onMousePressed(boolean leftClick) {
+        if (leftClick)
+        {
+            startClickPos = pointerPosToWorldPoint();
+            EditorManager.selectRectangle.startClick();
+        }
     }
 
 
@@ -124,7 +130,7 @@ public class EditorPointer extends MousePointer {
 
                 if(xPos < cursorXPos && cursorXPos < xPos2)
                 {
-                    if(yPos < cursorYPos && cursorYPos < yPos2 && !obj.isQueuedForDeletion())
+                    if(yPos < cursorYPos && cursorYPos < yPos2 && !obj.isQueuedForDeletion() && !obj.getIdentity().compareTag("SelectRect"))
                     {
                         EditorManager.editorScene.remove(obj);
                         EditorManager.AddEditorAction(new EditorActionHistory(EditorAction.DELETE, obj));
