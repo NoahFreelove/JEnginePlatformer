@@ -5,10 +5,12 @@ import com.JEngine.Core.Position.Vector3;
 import com.JEngine.Game.Visual.GameCamera;
 import com.JEngine.Game.Visual.GameWindow;
 import com.JEngine.Game.Visual.Scenes.GameScene;
+import com.JEngine.Game.Visual.Scenes.SceneManager;
 import com.JEngine.Utility.About.GameInfo;
 import com.jengineplatformer.LevelEditor.EditorManager;
 import com.jengineplatformer.LevelEditor.LevelSaver;
 import javafx.application.Application;
+import javafx.scene.input.KeyCode;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -38,6 +40,13 @@ public class Main extends Application {
             }
             if (event.getCode() == javafx.scene.input.KeyCode.F1) {
                 EditorManager.ReloadEditScene(true);
+            }
+            if(event.getCode() == KeyCode.ESCAPE) {
+                if(!EditorManager.isPlaying())
+                {
+                    SceneManager.switchScene(new MainMenu());
+                }
+
             }
         });
         EditorManager.LoadEditor();

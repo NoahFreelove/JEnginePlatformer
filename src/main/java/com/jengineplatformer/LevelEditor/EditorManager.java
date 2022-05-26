@@ -43,12 +43,11 @@ public class EditorManager {
 
     public static void PlayTempScene(){
         LevelSaver.SaveLevel(editorScene, "Levels/tmp");
+        setIsPlaying(true);
         Play(true);
     }
 
-    private static void InitEditor(){
-
-    }
+    private static void InitEditor(){}
 
     public static void ReloadEditScene(boolean loadTmp){
         editorScene = new GameScene(5, "EditorScene");
@@ -90,6 +89,13 @@ public class EditorManager {
         helpText.setY(30);
         editorScene.addUI(helpText);
 
+        Text levelNameText = new Text("Editing: " + editorScene.getSceneName());
+        levelNameText.setFill(Color.GREEN);
+        levelNameText.setFont(Font.font("Verdana", FontWeight.LIGHT, 15));
+        levelNameText.setX(1200 - levelNameText.getLayoutBounds().getWidth());
+        levelNameText.setY(30);
+        editorScene.addUI(levelNameText);
+
         currentSelectedObjectText = new Text("Selected: " + pointer.getSelectedObject());
         currentSelectedObjectText.setFill(Color.RED);
         currentSelectedObjectText.setFont(Font.font("Verdana", FontWeight.LIGHT, 15));
@@ -106,7 +112,6 @@ public class EditorManager {
     }
 
     public static void Play(boolean isTmp){
-        setIsPlaying(true);
 
         if(isTmp)
         {

@@ -40,10 +40,6 @@ public class EditorCamera extends Player {
         {
             Move(new Vector2(1,0), moveSpeed);
         }
-        if(Input.Escape_Pressed)
-        {
-            EditorManager.QuitEditor();
-        }
         if(Input.Shift_Pressed)
         {
             moveSpeed = sprintSpeed;
