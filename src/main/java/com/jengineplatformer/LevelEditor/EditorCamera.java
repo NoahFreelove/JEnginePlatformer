@@ -90,6 +90,12 @@ public class EditorCamera extends Player {
                     EditorManager.Undo();
                 }
             }
+            case S -> {
+                if (Input.Control_Pressed)
+                {
+                    LevelSaver.SaveLevel(EditorManager.editorScene, EditorManager.sceneFP);
+                }
+            }
             case ESCAPE -> EditorManager.QuitEditor();
         }
     }

@@ -49,7 +49,6 @@ public class Main extends Application {
 
             }
         });
-        EditorManager.LoadEditor();
     }
 
     public static void main(String[] args) {
