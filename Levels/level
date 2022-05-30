@@ -1,58 +1,6 @@
 Sample Level
 START GAMEOBJECT
 transform
-1375.0
-320.0
-2.0
-90.0
-0.0
-0.0
-1.0
-1.0
-1.0
-spike
-END GAMEOBJECT
-START GAMEOBJECT
-transform
-3141.3333
-1902.0
-2.0
-0.0
-0.0
-0.0
-1.0
-1.0
-1.0
-wintile
-END GAMEOBJECT
-START GAMEOBJECT
-transform
-1193.0
-252.0
-2.0
-0.0
-0.0
-0.0
-1.0
-1.0
-1.0
-spike
-END GAMEOBJECT
-START GAMEOBJECT
-transform
-1375.0
-390.0
-2.0
-90.0
-0.0
-0.0
-1.0
-1.0
-1.0
-spike
-END GAMEOBJECT
-START GAMEOBJECT
-transform
 1326.0
 308.0
 2.0
@@ -61,19 +9,6 @@ transform
 0.0
 0.328125
 0.234375
-1.0
-wall
-END GAMEOBJECT
-START GAMEOBJECT
-transform
-634.0
-321.0
-2.0
-0.0
-0.0
-0.0
-0.4609375
-2.25
 1.0
 wall
 END GAMEOBJECT
@@ -326,16 +261,16 @@ wall
 END GAMEOBJECT
 START GAMEOBJECT
 transform
-988.0
-540.0
+634.0
+321.0
 2.0
 0.0
 0.0
 0.0
+0.4609375
+2.25
 1.0
-1.0
-1.0
-enemy
+wall
 END GAMEOBJECT
 START GAMEOBJECT
 transform
@@ -586,16 +521,16 @@ wall
 END GAMEOBJECT
 START GAMEOBJECT
 transform
-1604.0
-414.0
+988.0
+540.0
 2.0
-270.0
 0.0
 0.0
+0.0
 1.0
 1.0
 1.0
-spike
+enemy
 END GAMEOBJECT
 START GAMEOBJECT
 transform
@@ -648,4 +583,69 @@ transform
 1.3124999
 1.0
 wall
+END GAMEOBJECT
+START GAMEOBJECT
+transform
+1375.0
+320.0
+2.0
+90.0
+0.0
+0.0
+1.0
+1.0
+1.0
+spike
+END GAMEOBJECT
+START GAMEOBJECT
+transform
+3141.3333
+1902.0
+2.0
+0.0
+0.0
+0.0
+1.0
+1.0
+1.0
+wintile
+END GAMEOBJECT
+START GAMEOBJECT
+transform
+1193.0
+252.0
+2.0
+0.0
+0.0
+0.0
+1.0
+1.0
+1.0
+spike
+END GAMEOBJECT
+START GAMEOBJECT
+transform
+1375.0
+390.0
+2.0
+90.0
+0.0
+0.0
+1.0
+1.0
+1.0
+spike
+END GAMEOBJECT
+START GAMEOBJECT
+transform
+1604.0
+414.0
+2.0
+270.0
+0.0
+0.0
+1.0
+1.0
+1.0
+spike
 END GAMEOBJECT

@@ -24,7 +24,7 @@ public class PlatformPlayer extends Player {
     private GameCamera camera;
     private float moveSpeed = 5f;
 
-    private Vector2 normalGravity = PhysicsBody_Comp.getGlobalGravity();
+    private Vector2 normalGravity = new Vector2(0,5f);
     private Vector2 strongGravity = new Vector2(0,100f);
     private boolean isStrongGravity;
     private long score;
@@ -93,13 +93,9 @@ public class PlatformPlayer extends Player {
     public void onKeyReleased(KeyCode keyCode)
     {
 
-        switch (keyCode)
-        {
-            case S ->{
-                isStrongGravity = false;
-                physicsBody.setGravity(normalGravity);
-            }
-
+        if (keyCode == KeyCode.S || keyCode == KeyCode.DOWN) {
+            isStrongGravity = false;
+            physicsBody.setGravity(normalGravity);
         }
     }
 
